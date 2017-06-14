@@ -1,0 +1,14 @@
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+        <tr>
+            {% for title in titles %}
+                <th>{{ title }}</th>
+            {% endfor %}
+        </tr>
+        </thead>
+        <tbody>
+        {% block content %}{% endblock %}
+        </tbody>
+    </table>
+</div>

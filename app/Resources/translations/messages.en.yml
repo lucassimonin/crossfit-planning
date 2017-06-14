@@ -1,0 +1,11 @@
+app:
+    product:
+        title: Products
+        meta_title:
+            list: Admin product list
+    user:
+        title: Users
+        meta_title:
+            list: Admin user list
+    global:
+        title: Disko test

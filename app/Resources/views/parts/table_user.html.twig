@@ -1,0 +1,22 @@
+{% extends ':parts:base_table.html.twig' %}
+
+{% block content %}
+    {% for user in datas %}
+        <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.email }}</td>
+            <td>
+                {% set remove = true %}
+                {% for role in user.roles %}
+                    {% if role == 'ROLE_SUPER_ADMIN' %}
+                        {% set remove = false %}
+                    {% endif %}
+                    {{ role }}{% if not loop.last %} | {% endif %}
+                {% endfor %}
+            </td>
+            {% include ':parts:actions.html.twig'  with {'id': user.id, 'remove': remove } %}
+        </tr>
+    {% endfor %}
+
+{% endblock %}

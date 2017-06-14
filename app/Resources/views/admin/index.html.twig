@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+{% block meta_title %}Admin Index{% endblock %}
+{% block content %}
+<div class="container" id="main">
+    <div class="col-md-6">
+        <div class="row">
+            <h2>Products</h2>
+            <ul>
+                <li><a href="{{ path('product_list') }}">List</a></li>
+                <li><a href="{{ path('product_add') }}">Add</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="row">
+            <h2>Users</h2>
+            <ul>
+                <li><a href="{{ path('user_list') }}">List</a></li>
+                <li><a href="{{ path('user_add') }}">Add</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

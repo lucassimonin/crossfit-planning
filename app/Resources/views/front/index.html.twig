@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+{% block meta_title %}Index{% endblock %}
+{% block content %}
+<div class="container" id="main">
+    <h2>Products</h2>
+    {% if products|length > 0 %}
+        {% include ':parts:table_product.html.twig' with {'titles': ['#', 'Name', 'Price', 'Description'], 'datas': products} %}
+    {% else %}
+        No data.
+    {% endif %}
+</div>
+{% endblock %}

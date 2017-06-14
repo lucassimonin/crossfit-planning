@@ -1,0 +1,18 @@
+{% spaceless %}
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>{% block meta_title %}{% endblock %} - {{ 'app.global.title'|trans }}</title>
+        {% include 'pagelayout/page_head.html.twig' %}
+        {% include 'pagelayout/page_head_style.html.twig' %}
+        {% include 'pagelayout/page_head_for_ie.html.twig' %}
+        {% include 'pagelayout/page_head_script.html.twig' %}
+    </head>
+    <body>
+        {% include 'pagelayout/page_header.html.twig' %}
+        {% include 'pagelayout/flashmessage.html.twig' %}
+        {% block content %}{% endblock %}
+        {% include 'pagelayout/page_footer_script.html.twig' %}
+    </body>
+    </html>
+{% endspaceless %}
