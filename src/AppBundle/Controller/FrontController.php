@@ -87,7 +87,6 @@ class FrontController extends Controller
         $session->addUser($user);
         $entityManager->persist($session);
         $entityManager->flush();
-        $user->setHoursByWeek($user->getHoursByWeek() - 1);
         $entityManager->persist($user);
         $entityManager->flush();
         $this->addFlash('success', "app.session.add");
@@ -124,9 +123,6 @@ class FrontController extends Controller
         $user = $params['user'];
         $session->removeUser($user);
         $entityManager->persist($session);
-        $entityManager->flush();
-        $user->setHoursByWeek($user->getHoursByWeek() + 1);
-        $entityManager->persist($user);
         $entityManager->flush();
         $this->addFlash('success', "app.session.subscription_removed");
 
@@ -195,6 +191,9 @@ class FrontController extends Controller
             $this->addFlash('danger', "app.session.not_exist");
 
             return $this->redirectToRoute('homepage');
+        }
+        foreach ($session->getUsers() as $user) {
+            $user->removeSession($session);
         }
         $entityManager->remove($session);
         $entityManager->flush();

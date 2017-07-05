@@ -60,11 +60,13 @@ class User extends BaseUser
     public function addSession(Session $session)
     {
         $this->sessions[] = $session;
+        $this->hoursByWeek--;
     }
 
     public function removeSession(Session $session)
     {
         $this->sessions->removeElement($session);
+        $this->hoursByWeek++;
     }
 
     public function isAdmin()
