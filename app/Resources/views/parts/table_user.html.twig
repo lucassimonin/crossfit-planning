@@ -6,16 +6,10 @@
             <td>{{ user.id }}</td>
             <td>{{ user.username }}</td>
             <td>{{ user.email }}</td>
-            <td>
-                {% set remove = true %}
-                {% for role in user.roles %}
-                    {% if role == 'ROLE_SUPER_ADMIN' %}
-                        {% set remove = false %}
-                    {% endif %}
-                    {{ role }}{% if not loop.last %} | {% endif %}
-                {% endfor %}
-            </td>
-            {% include ':parts:actions.html.twig'  with {'id': user.id, 'remove': remove } %}
+            <td>{{ user.firstName }} {{ user.lastName }}</td>
+            <td>{{ user.phone }}</td>
+            <td>{% if user.enabled %}{{ 'app.user.form.enabled'|trans }}{% else %}{{ 'app.user.form.disabled'|trans }}{% endif %}</td>
+            {% include ':parts:actions.html.twig'  with {'id': user.id, 'remove': not user.isAdmin } %}
         </tr>
     {% endfor %}
 

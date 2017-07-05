@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+{% block meta_title %}{% endblock %}
+{% block content %}
+    <div class="container" id="main">
+        {% form_theme form 'form/form_theme.html.twig' %}
+        {{ form_start( form ) }}
+        {{ form_row( form.day, {
+            'label': 'app.session.form.day',
+        } ) }}
+            {{ form_row( form.startTime, {
+                'label': "app.session.form.start_time",
+            } ) }}
+            {{ form_row( form.endTime, {
+                'label': "app.session.form.end_time",
+            } ) }}
+
+        {{ form_row( form.save, {
+            'label': "app.session.form.save",
+        } ) }}
+        {{ form_end( form ) }}
+    </div>
+{% endblock %}

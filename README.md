@@ -1,4 +1,4 @@
-Disko test
+Crossfit planning
 =========
 
 To launch the application :
@@ -12,4 +12,5 @@ To launch the application :
 
 go to : http://127.0.0.1:8000 (admin credentials : admin/admin)
 
-A Symfony project created on June 13, 2017, 4:50 pm.
+TODO
+=========

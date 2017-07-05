@@ -1,38 +1,31 @@
 {% extends 'base.html.twig' %}
 {% trans_default_domain 'FOSUserBundle' %}
+{% block page_header %}
+{% endblock %}
 {% block content %}
     {% if error %}
         <div class="alert alert-danger">
             {{ error.messageKey|trans(error.messageData, 'security') }}
         </div>
     {% endif %}
-    <div class="wrapper">
-
-        <form class="form-horizontal col-xs-offset-4 col-xs-4" id="login" action="{{ path("fos_user_security_check") }}" method="post">
-            <h2 class="text-center">Login to admin</h2>
-            {% if csrf_token %}
-                <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
-            {% endif %}
-            <div class="form-group">
-                <div class="col-xs-12">
-                    <input type="text" class="form-control" id="username" placeholder="{{ 'security.login.username'|trans }}" name="_username" value="{{ last_username }}" required="required" />
+        <div class="col-md-4 col-md-offset-4">
+            <h1 id="login-img">
+                <img src={{ asset('/assets/public/img/logo-login.png') }} />
+            </h1>
+            <form id="login" action="{{ path("fos_user_security_check") }}" method="post">
+                {% if csrf_token %}
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                {% endif %}
+                    <div class="form-group">
+                        <input type="text" id="username" class="input-planner login form-control" name="_username" value="{{ last_username }}" required="required" autofocus="autofocus" autocomplete="on" placeholder="{{ 'security.login.username'|trans }}" />
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="password" class="input-planner form-control password" name="_password" required="required" placeholder="{{ 'security.login.password'|trans }}" />
+                    </div>
+                <div class="form-group">
+                        <input type="checkbox" id="remember_me" name="_remember_me" value="on" /> {{ 'security.login.remember_me'|trans }}
                 </div>
-            </div>
-            <div class="form-group">
-                <div class="col-xs-12">
-                    <input type="password" class="form-control" id="password" placeholder="{{ 'security.login.password'|trans }}" name="_password" required="required" />
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-xs-12">
-                    <input type="checkbox" id="remember_me" name="_remember_me" value="on" /> {{ 'security.login.remember_me'|trans }}
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-xs-12">
-                    <button class="btn btn-lg btn-primary btn-block" type="submit" id="_submit" name="_submit">{{ 'security.login.submit'|trans }}</button>
-                </div>
-            </div>
-        </form>
-    </div>
+                    <button type="submit" class="btn btn-login">{{ 'Login'|trans }}</button>
+            </form>
+        </div>
 {% endblock content %}

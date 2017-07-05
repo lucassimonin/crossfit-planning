@@ -1,9 +1,5 @@
-#main, #login {
+#main {
     margin-top: 20px;
-}
-
-#login {
-    border: 1px solid #ebebeb;
 }
 
 #navbar-container {
@@ -14,3 +10,141 @@
     padding-bottom: 15px;
     padding-top: 15px;
 }
+
+.title-day, .block-day .list-group-item {
+    text-align: center;
+}
+
+.block-day .hour {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.btn.login {
+    padding-top:17px;
+    padding-bottom: 17px;
+}
+
+.form-control {
+    border-radius: 0;
+}
+
+.btn-login {
+    margin: 20px 0 12px;
+    height: 64px;
+}
+
+#login-img {
+    margin-top: 50px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.btn-login, .btn-subscription {
+    border: 1px solid #337ab7;
+    background-color: rgb(255, 255, 255);
+    color: #337ab7;
+    background-color: transparent;
+    outline: none;
+    cursor: pointer;
+    width:100%;
+    border-radius: 0;
+}
+.btn-openclose {
+    margin-top:5px;
+}
+
+.alert, .navbar {
+    border-radius: 0;
+}
+
+.block-day .alert-info, .block-day .alert-danger {
+    padding: 6px 12px;
+}
+
+h1, .h1, h2, .h2, h3, .h3 {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.btn-delete.btn-subscription {
+    border: 1px solid #A21D21;
+    background-color: rgb(255, 255, 255);
+    color: #A21D21;
+    margin-top:10px;
+}
+
+.clear {
+    clear:both;
+}
+
+.btn-subscription:hover {
+    background-color: #337ab7;
+    color:#fff;
+}
+
+.btn-delete:hover {
+    background-color: #A21D21;
+    color:#fff;
+}
+
+.input-planner {
+    height: 64px;
+    color: rgba(0,0,0,0.54);
+    padding-right: 23px;
+    padding-left: 64px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    background-color: rgb(249, 249, 249);
+    box-shadow: none;
+    border: 1px solid rgba(0,0,0,0.117647);
+}
+
+.input-planner.login {
+    background: url("../../public/img/IconUsername.svg") no-repeat 26px center;
+}
+
+.navbar-brand {
+    padding: 5px 15px;
+}
+
+.input-planner.password {
+    background: url("../../public/img/IconLock.svg") no-repeat 26px center;
+}
+
+.block-day .panel-heading {
+    text-align: center;
+}
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+}
+
+@media (max-width: 1200px) {
+    .title-day {
+        font-size: 23px;
+    }
+    .block-day .hour {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 992px) {
+}
+
+@media (max-width: 767px) {
+    .list-group {
+        display: none;
+    }
+}
+
+
+

@@ -4,6 +4,10 @@ parameters:
     #parameter_name: value
 
 services:
+    app.form.registration:
+        class: AppBundle\Form\Type\RegistrationType
+        tags:
+            - { name: form.type, alias: app_user_registration }
     # default configuration for services in *this* file
     _defaults:
         # automatically injects dependencies in your services

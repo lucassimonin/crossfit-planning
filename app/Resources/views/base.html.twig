@@ -9,7 +9,9 @@
         {% include 'pagelayout/page_head_script.html.twig' %}
     </head>
     <body>
-        {% include 'pagelayout/page_header.html.twig' %}
+        {% block page_header %}
+            {% include 'pagelayout/page_header.html.twig' %}
+        {% endblock %}
         {% include 'pagelayout/flashmessage.html.twig' %}
         {% block content %}{% endblock %}
         {% include 'pagelayout/page_footer_script.html.twig' %}

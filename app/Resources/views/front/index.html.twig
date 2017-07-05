@@ -1,12 +1,42 @@
 {% extends 'base.html.twig' %}
-{% block meta_title %}Index{% endblock %}
+{% block meta_title %}Accueil{% endblock %}
 {% block content %}
 <div class="container" id="main">
-    <h2>Products</h2>
-    {% if products|length > 0 %}
-        {% include ':parts:table_product.html.twig' with {'titles': ['#', 'Name', 'Price', 'Description'], 'datas': products} %}
+    {% if sessions|length > 0 %}
+        {% for name, session in sessions %}
+            <div class="col-sm-4 {% if loop.index == 4 %}clear{% endif %}">
+                <div class="block-day panel panel-default">
+                    <div class="panel-heading">
+                        <h2 class="title-day">{{ name|trans }}</h2>
+                        <button type="button" class="btn btn-subscription btn-openclose" data-toggle="collapse" data-target="#{{ name|trans|lower }}_{{ loop.index }}">{{ 'app.btn.open'|trans }}</button>
+                    </div>
+                    <ul class="list-group" id="{{ name|trans|lower }}_{{ loop.index }}">
+                        {% for training in session %}
+                        <li class="list-group-item {% if training.disabled %} disabled {% endif %}">
+                            <span class="badge" title="inscrit">{{ 'app.subscription'|trans({'%nbuser%': training.session.users|length}) }}</span>
+                            <div class="clearfix"></div>
+                            <p class="hour">{{ training.session.startTime|date('H:i') }} - {{ training.session.endTime|date('H:i') }}</p>
+                            {% if not training.disabled and not app.user.isFullSubscription and not app.user.isInThisSession(training.session.id) and not training.session.isMaxUsers %}
+                                <a href="{{ path('subscription_add', {'id': training.session.id}) }}" class="btn-md btn btn-subscription">{{ 'app.btn.subscription'|trans }}</a>
+                            {% else %}
+                                {% if app.user.isInThisSession(training.session.id) %}
+                                    <p class="alert-info">{{ 'app.session.subscription_here'|trans }}</p>
+                                    <a href="{{ path('subscription_remove', {'id': training.session.id}) }}" class="btn-md btn btn-subscription btn-delete">{{ 'app.btn.unsubscription'|trans }}</a>
+                                {% elseif training.session.isMaxUsers %}
+                                    <p class="alert-danger">{{ 'app.session.max_user'|trans }}</p>
+                                {% endif %}
+                            {% endif %}
+                            {% if is_granted("ROLE_ADMIN") or is_granted("ROLE_SUPER_ADMIN") %}
+                                <a href="{{ path('session_delete', {'id': training.session.id}) }}" class="btn-md btn btn-subscription btn-delete">{{ 'app.btn.delete'|trans }}</a>
+                            {% endif %}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        {% endfor %}
     {% else %}
-        No data.
+        {{ 'app.no_data'|trans }}
     {% endif %}
 </div>
 {% endblock %}

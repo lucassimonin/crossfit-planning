@@ -2,27 +2,26 @@
 
 namespace AppBundle\DataFixtures\ORM;
 
+use AppBundle\Entity\User;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use FOS\UserBundle\Util\UserManipulator;
 
-class LoadUserData implements FixtureInterface, ContainerAwareInterface
+class LoadUserData implements FixtureInterface
 {
-    /**
-     * @var ContainerInterface
-     */
-    private $container;
-
-    public function setContainer(ContainerInterface $container = null)
-    {
-        $this->container = $container;
-    }
     public function load(ObjectManager $manager)
     {
-        $manipulator = $this->container->get('fos_user.util.user_manipulator');
-        $manipulator->create('admin', 'admin', 'admin@admin.com', true, true);
-        $manipulator->create('test_disabled', 'test', 'testdisabled@test.com', false, false);
-        $manipulator->create('test_enabled', 'test', 'testenabled@test.com', true, false);
+        $user = new User();
+        $user->setUsername('admin');
+        $user->setEmail('admin@admin.com');
+        $user->setPlainPassword('admin');
+        $user->setLastName('admin');
+        $user->setFirstName('admin');
+        $user->setPhone('00');
+        $user->setEnabled(true);
+        $user->setSuperAdmin(true);
+
+        $manager->persist($user);
+        $manager->flush();
     }
 }

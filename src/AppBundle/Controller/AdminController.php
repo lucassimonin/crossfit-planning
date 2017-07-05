@@ -2,7 +2,7 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Form\Type\ProductType;
+use AppBundle\Form\Type\SessionType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Entity\User;
@@ -22,17 +22,6 @@ class AdminController extends Controller
     }
 
     /**
-     * @Route("/admin/product/list", name="product_list")
-     * Product list page
-     */
-    public function productListAction()
-    {
-        $entityManager = $this->container->get('doctrine.orm.entity_manager');
-        $products = $entityManager->getRepository('AppBundle:Product')->findAllOrderBy(['price' => 'ASC']);
-        return $this->render('admin/list.html.twig', ['datas' => $products, 'type' => 'product', 'titles' => ['#', 'Name', 'Price', 'Description'], 'back' => true]);
-    }
-
-    /**
      * @Route("/admin/product/add/{id}", name="product_add", requirements={"id": "\d+"})
      * Add and Edit product
      * @param Request $request
@@ -48,7 +37,7 @@ class AdminController extends Controller
             $product = new Product();
         }
 
-        $form = $this->createForm(ProductType::class, $product);
+        $form = $this->createForm(SessionType::class, $product);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($product);
@@ -104,7 +93,7 @@ class AdminController extends Controller
     {
         $entityManager = $this->container->get('doctrine.orm.entity_manager');
         $users = $entityManager->getRepository('AppBundle:User')->findAll();
-        return $this->render('admin/list.html.twig', ['datas' => $users, 'type' => 'user', 'titles' => ['#', 'Username', 'Email', 'Roles']]);
+        return $this->render('admin/list.html.twig', ['datas' => $users, 'type' => 'user', 'titles' => ['app.user.form.htag', 'app.user.form.username', 'app.user.form.email', 'app.user.form.lastname', 'app.user.form.phone', 'app.user.form.enabled']]);
     }
 
     /**
