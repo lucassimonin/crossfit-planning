@@ -7,6 +7,7 @@ app:
             start_time: Heure de début
             end_time: Heure de fin
             save: Sauvegarder
+        already_start: Cette session à déjà commencée ou est terminée !
         not_exist: Cette session n'existe pas !
         removed: Session supprimée.
         max_user: Cette session n'a plus de place ! Choisissez en une autre.

@@ -22,19 +22,9 @@ class FrontController extends Controller
         $sessions = $this->getDoctrine()->getRepository('AppBundle:Session')->findAllOrderBy(['day' => 'ASC', 'startTime' => 'ASC']);
         $sessionArray = [];
         if(count($sessions) > 0 ) {
-            $currentHour = strtotime(date('H:i'));
-            $currentDay = intval(date( "w"));
             foreach($sessions as $session) {
-                $disabled = false;
-                $sessionStartHour = strtotime(date('H:i', $session->getStartTime()));
-                $sessionEndHour = strtotime(date('H:i', $session->getEndTime()));
-
-                if ($session->getDay() < $currentDay || ($session->getDay() == $currentDay && $currentHour >= $sessionStartHour && $currentHour >= $sessionEndHour) ||
-                    ($currentHour <= $sessionStartHour && $currentHour <= $sessionEndHour)) {
-                    $disabled = true;
-                }
                 $sessionArray[$session->intToDay()][] = [
-                    'disabled' => $disabled,
+                    'disabled' => $session->isStarted(),
                     'session' => $session
                 ];
             }
@@ -84,6 +74,13 @@ class FrontController extends Controller
 
             return $this->redirectToRoute('homepage');
         }
+        if ($session->isStarted()) {
+            $this->addFlash('danger', "app.session.already_start");
+
+            return $this->redirectToRoute('homepage');
+        }
+
+
         $session->addUser($user);
         $entityManager->persist($session);
         $entityManager->flush();

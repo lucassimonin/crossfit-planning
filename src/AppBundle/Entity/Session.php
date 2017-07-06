@@ -121,6 +121,18 @@ class Session
         return $this->endTime;
     }
 
+    public function isStarted()
+    {
+        $currentHour = strtotime(date('H:i'));
+        $currentDay = intval(date( "w"));
+        $sessionStartHour = strtotime(date('H:i', $this->getStartTime()));
+        if ($this->getDay() < $currentDay || ($this->getDay() == $currentDay && $currentHour >= $sessionStartHour)) {
+             return true;
+        }
+
+        return false;
+    }
+
     /**
      * @param int $endTime
      */
