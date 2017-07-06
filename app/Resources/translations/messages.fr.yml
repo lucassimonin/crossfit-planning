@@ -36,6 +36,10 @@ app:
     user:
         list: Liste utilisateur
         title: Utilisateurs
+        user_create: Utilisateur crée/modifié !
+        user_not_exist: L'utilisateur n'existe pas !
+        admin_user: Impossible de modifier le statut d'un Admin !
+        state_update: Statut modifié.
         meta_title:
             list: Liste utilisateur
         form:

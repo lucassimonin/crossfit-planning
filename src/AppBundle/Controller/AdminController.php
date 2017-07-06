@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Form\Type\SessionType;
+use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Entity\User;
@@ -19,35 +20,6 @@ class AdminController extends Controller
     public function indexAction()
     {
         return $this->render('admin/index.html.twig', []);
-    }
-
-    /**
-     * @Route("/admin/product/add/{id}", name="product_add", requirements={"id": "\d+"})
-     * Add and Edit product
-     * @param Request $request
-     * @param int $id
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
-     */
-    public function productAddAction(Request $request, $id = 0)
-    {
-        $entityManager = $this->container->get('doctrine.orm.entity_manager');
-        $repository = $entityManager->getRepository('AppBundle:Product');
-        $product = $repository->find($id);
-        if (null === $product) {
-            $product = new Product();
-        }
-
-        $form = $this->createForm(SessionType::class, $product);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($product);
-            $entityManager->flush();
-            $this->addFlash('success', "Product updated/created !");
-
-            return $this->redirectToRoute('product_list');
-        }
-
-        return $this->render('admin/form/add_product.html.twig', ['form' => $form->createView()]);
     }
 
     /**
@@ -78,7 +50,7 @@ class AdminController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $userManager->updateUser($user);
-            $this->addFlash('success', "User updated/created !");
+            $this->addFlash('success', 'app.user.user_create');
 
             return $this->redirectToRoute('user_list');
         }
@@ -94,6 +66,35 @@ class AdminController extends Controller
         $entityManager = $this->container->get('doctrine.orm.entity_manager');
         $users = $entityManager->getRepository('AppBundle:User')->findAll();
         return $this->render('admin/list.html.twig', ['datas' => $users, 'type' => 'user', 'titles' => ['app.user.form.htag', 'app.user.form.username', 'app.user.form.email', 'app.user.form.lastname', 'app.user.form.phone', 'app.user.form.enabled']]);
+    }
+    /**
+     * @Route("/admin/user_state/{id}", name="user_change_state", requirements={"id": "\d+"})
+     */
+    public function changeStateUserAction($id)
+    {
+        /** @var EntityManager $entityManager */
+        $entityManager = $this->container->get('doctrine.orm.entity_manager');
+        $repository = $entityManager->getRepository('AppBundle:User');
+        /** @var User $user */
+        $user = $repository->find($id);
+        if (null === $user) {
+            $this->addFlash('danger', 'app.user.user_not_exist');
+
+            return $this->redirectToRoute('user_list');
+        }
+        if($user->isSuperAdmin()) {
+            $this->addFlash('danger', 'app.user.admin_user');
+
+            return $this->redirectToRoute('user_list');
+        }
+        $user->setEnabled(!$user->isEnabled());
+        $entityManager->persist($user);
+        $entityManager->flush();
+
+        $this->addFlash('success', 'app.user.state_update');
+
+        return $this->redirectToRoute('user_list');
+
     }
 
     /**

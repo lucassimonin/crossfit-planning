@@ -69,11 +69,6 @@ class User extends BaseUser
         $this->hoursByWeek++;
     }
 
-    public function isAdmin()
-    {
-        return in_array('ROLE_SUPER_ADMIN', $this->roles);
-    }
-
     public function isFullSubscription()
     {
         return ($this->getHoursByWeek() === 0);
@@ -157,6 +152,8 @@ class User extends BaseUser
     {
         return $this->firstName . ' ' . $this->lastName;
     }
+
+
 
 
 }

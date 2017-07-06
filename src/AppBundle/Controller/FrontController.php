@@ -222,7 +222,7 @@ class FrontController extends Controller
         $user = $this->get('security.token_storage')->getToken()->getUser();
         $params['error'] = false;
         $params['user'] = $user;
-        $params['admin'] = in_array('ROLE_SUPER_ADMIN', $user->getRoles());
+        $params['admin'] = $user->isSuperAdmin();
 
         return $params;
     }
