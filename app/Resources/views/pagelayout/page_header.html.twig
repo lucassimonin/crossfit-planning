@@ -20,7 +20,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <li>
                     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                        <span class="user-logged pull-left">{{ 'layout.logged_in_as'|trans({'%username%': app.user.username, '%hour%': app.user.hoursByWeek}) }} |</span>
+                        <span class="user-logged pull-left">{{ 'layout.logged_in_as'|trans({'%username%': app.user.fullname, '%hour%': app.user.hoursByWeek}) }} |</span>
                         <a class="pull-left" href="{{ path('fos_user_security_logout') }}">
                             {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
                         </a>

@@ -153,5 +153,10 @@ class User extends BaseUser
         $this->phone = $phone;
     }
 
+    public function getFullName()
+    {
+        return $this->firstName . ' ' . $this->lastName;
+    }
+
 
 }

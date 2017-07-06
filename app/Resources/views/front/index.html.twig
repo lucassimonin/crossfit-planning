@@ -4,7 +4,7 @@
 <div class="container" id="main">
     {% if sessions|length > 0 %}
         {% for name, session in sessions %}
-            <div class="col-sm-4 {% if loop.index == 4 %}clear{% endif %}">
+            <div class="col-sm-4 {% if loop.index == 4 or loop.index == 7 %}clear{% endif %}">
                 <div class="block-day panel panel-default">
                     <div class="panel-heading">
                         <h2 class="title-day">{{ name|trans }}</h2>
@@ -12,8 +12,19 @@
                     </div>
                     <ul class="list-group" id="{{ name|trans|lower }}_{{ loop.index }}">
                         {% for training in session %}
+                            {% if training.session.users|length == 0 %}
+                                {% set textTooltip = 'app.session.no_user'|trans %}
+                            {% else %}
+                                {% set textTooltip %}
+                                    <ol>
+                                        {% for user in training.session.users %}
+                                            <li>{{ user.fullname }}</li>
+                                        {% endfor %}
+                                    </ol>
+                                {% endset %}
+                            {% endif %}
                         <li class="list-group-item {% if training.disabled %} disabled {% endif %}">
-                            <span class="badge" title="inscrit">{{ 'app.subscription'|trans({'%nbuser%': training.session.users|length, '%maxuser%': max_user}) }}</span>
+                            <span class="badge" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="{{ 'app.session.subscription_in'|trans }}" data-content="{{ textTooltip }}">{{ 'app.subscription'|trans({'%nbuser%': training.session.users|length, '%maxuser%': max_user}) }}</span>
                             <div class="clearfix"></div>
                             <p class="hour">{{ training.session.startTime|date('H:i') }} - {{ training.session.endTime|date('H:i') }}</p>
                             {% set maxUserInSession = twig_session_helper.isMaxUsers(training.session) %}

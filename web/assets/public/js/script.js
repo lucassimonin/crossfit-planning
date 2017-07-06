@@ -19,7 +19,10 @@ $( document ).ready(function() {
         hideShowMobile();
     });
     hideShowMobile();
-
-
-
+    if($('[data-toggle="popover"]').length) {
+        $('[data-toggle="popover"]').popover({
+            container: 'body',
+            html: true
+        });
+    }
 });
