@@ -22,7 +22,8 @@ $( document ).ready(function() {
     if($('[data-toggle="popover"]').length) {
         $('[data-toggle="popover"]').popover({
             container: 'body',
-            html: true
+            html: true,
+            placement: 'auto'
         });
     }
 });
