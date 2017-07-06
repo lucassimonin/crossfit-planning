@@ -8,7 +8,6 @@ use Doctrine\Common\Persistence\ObjectManager;
 
 class LoadSessionData implements FixtureInterface
 {
-
     public function load(ObjectManager $manager)
     {
         $session = new Session();
@@ -154,7 +153,5 @@ class LoadSessionData implements FixtureInterface
 
         $manager->persist($session);
         $manager->flush();
-
-
     }
 }

@@ -11,7 +11,6 @@ use AppBundle\Entity\Session;
  */
 class SessionHelper
 {
-
     private $maxUserBySession;
 
     /**
@@ -31,7 +30,7 @@ class SessionHelper
     public function isStarted(Session $session) : bool
     {
         $currentHour = strtotime(date('H:i'));
-        $currentDay = intval(date( "w"));
+        $currentDay = intval(date("w"));
         $sessionStartHour = strtotime(date('H:i', $session->getStartTime()));
         if ($session->getDay() < $currentDay || ($session->getDay() == $currentDay && $currentHour >= $sessionStartHour)) {
             return true;
@@ -44,5 +43,4 @@ class SessionHelper
     {
         return (count($session->getUsers()) === $this->maxUserBySession);
     }
-
 }

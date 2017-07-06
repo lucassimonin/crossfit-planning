@@ -152,8 +152,4 @@ class User extends BaseUser
     {
         return $this->firstName . ' ' . $this->lastName;
     }
-
-
-
-
 }

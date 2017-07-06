@@ -48,5 +48,4 @@ class ResetWeekCommand extends ContainerAwareCommand
         }
         $io->success('Week reset !');
     }
-
 }

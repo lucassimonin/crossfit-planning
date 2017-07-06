@@ -82,7 +82,7 @@ class AdminController extends Controller
 
             return $this->redirectToRoute('user_list');
         }
-        if($user->isSuperAdmin()) {
+        if ($user->isSuperAdmin()) {
             $this->addFlash('danger', 'app.user.admin_user');
 
             return $this->redirectToRoute('user_list');
@@ -94,7 +94,6 @@ class AdminController extends Controller
         $this->addFlash('success', 'app.user.state_update');
 
         return $this->redirectToRoute('user_list');
-
     }
 
     /**
@@ -110,13 +109,13 @@ class AdminController extends Controller
         $object = $repository->find($id);
         $error = false;
         if (null === $object) {
-            $this->addFlash('danger', "Object doesn't exist !");
+            $this->addFlash('danger', 'app.user.user_not_exist');
             $error = true;
         }
         if (!$error) {
             $entityManager->remove($object);
             $entityManager->flush();
-            $this->addFlash('success', "Object deleted !");
+            $this->addFlash('success', 'app.user.state_update');
         }
 
         return $this->redirectToRoute($entity . '_list');

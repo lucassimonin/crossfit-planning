@@ -25,8 +25,8 @@ class FrontController extends Controller
         $sessionHelper = $this->get('app.session_helper');
         $sessions = $this->getDoctrine()->getRepository('AppBundle:Session')->findAllOrderBy(['day' => 'ASC', 'startTime' => 'ASC']);
         $sessionArray = [];
-        if(count($sessions) > 0 ) {
-            foreach($sessions as $session) {
+        if (count($sessions) > 0) {
+            foreach ($sessions as $session) {
                 $sessionArray[$session->intToDay()][] = [
                     'disabled' => $sessionHelper->isStarted($session),
                     'session' => $session
@@ -96,7 +96,6 @@ class FrontController extends Controller
         $this->addFlash('success', "app.session.add");
 
         return $this->redirectToRoute('homepage');
-
     }
 
 
@@ -145,7 +144,7 @@ class FrontController extends Controller
         $form = $this->createForm(SessionType::class, $session);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            if($session->getStartTime() >= $session->getEndTime()) {
+            if ($session->getStartTime() >= $session->getEndTime()) {
                 $this->addFlash('danger', "app.session.start_up_end");
 
                 return $this->render('front/add_session.html.twig', ['form' => $form->createView()]);
@@ -154,7 +153,7 @@ class FrontController extends Controller
             $entityManager = $this->container->get('doctrine.orm.entity_manager');
             $repository = $entityManager->getRepository('AppBundle:Session');
             $result = $repository->getExistingSession($session);
-            if(count($result) > 0) {
+            if (count($result) > 0) {
                 $this->addFlash('danger', "app.session.exist");
 
                 return $this->render('front/add_session.html.twig', ['form' => $form->createView()]);
@@ -167,7 +166,6 @@ class FrontController extends Controller
         }
 
         return $this->render('front/add_session.html.twig', ['form' => $form->createView()]);
-
     }
 
     /**
@@ -182,7 +180,7 @@ class FrontController extends Controller
         $params = $this->getUserInformation();
         if ($params['error']) {
             return $params['response'];
-        } else if (!$params['admin']) {
+        } elseif (!$params['admin']) {
             $this->addFlash('danger', "app.session.not_access");
 
             return $this->redirectToRoute('homepage');
@@ -226,5 +224,4 @@ class FrontController extends Controller
 
         return $params;
     }
-
 }

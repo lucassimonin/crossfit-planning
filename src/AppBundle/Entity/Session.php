@@ -72,7 +72,8 @@ class Session
         $user->removeSession($this);
     }
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->users = new ArrayCollection();
     }
 
@@ -163,7 +164,7 @@ class Session
     public function intToDay()
     {
         $string = '';
-        switch($this->day) {
+        switch ($this->day) {
             default:
             case Session::MONDAY:
                 $string = 'app.monday';

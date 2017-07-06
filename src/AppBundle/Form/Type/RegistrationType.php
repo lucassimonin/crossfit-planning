@@ -8,7 +8,6 @@
 
 namespace AppBundle\Form\Type;
 
-
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -36,5 +35,4 @@ class RegistrationType extends AbstractType
     {
         return 'app_user_registration';
     }
-
 }
