@@ -5,6 +5,8 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Session;
 use AppBundle\Entity\User;
 use AppBundle\Form\Type\SessionType;
+use AppBundle\Helper\SessionHelper;
+use AppBundle\Helper\UserHelper;
 use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -19,12 +21,14 @@ class FrontController extends Controller
      */
     public function indexAction()
     {
+        /** @var SessionHelper $sessionHelper */
+        $sessionHelper = $this->get('app.session_helper');
         $sessions = $this->getDoctrine()->getRepository('AppBundle:Session')->findAllOrderBy(['day' => 'ASC', 'startTime' => 'ASC']);
         $sessionArray = [];
         if(count($sessions) > 0 ) {
             foreach($sessions as $session) {
                 $sessionArray[$session->intToDay()][] = [
-                    'disabled' => $session->isStarted(),
+                    'disabled' => $sessionHelper->isStarted($session),
                     'session' => $session
                 ];
             }
@@ -56,7 +60,9 @@ class FrontController extends Controller
 
             return $this->redirectToRoute('homepage');
         }
-        if ($session->isMaxUsers()) {
+        /** @var SessionHelper $sessionHelper */
+        $sessionHelper = $this->get('app.session_helper');
+        if ($sessionHelper->isMaxUsers($session)) {
             $this->addFlash('danger', "app.session.max_user");
 
             return $this->redirectToRoute('homepage');
@@ -68,18 +74,19 @@ class FrontController extends Controller
 
             return $this->redirectToRoute('homepage');
         }
-
-        if ($user->isInThisSession($session->getId())) {
+        /** @var UserHelper $userHelper */
+        $userHelper = $this->get('app.user_helper');
+        if ($userHelper->isInThisSession($user, $session->getId())) {
             $this->addFlash('danger', "app.session.already_session");
 
             return $this->redirectToRoute('homepage');
         }
-        if ($session->isStarted()) {
+
+        if ($sessionHelper->isStarted($session)) {
             $this->addFlash('danger', "app.session.already_start");
 
             return $this->redirectToRoute('homepage');
         }
-
 
         $session->addUser($user);
         $entityManager->persist($session);

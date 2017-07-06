@@ -76,7 +76,7 @@ class User extends BaseUser
 
     public function isFullSubscription()
     {
-        return ($this->getHoursByWeek() == 0);
+        return ($this->getHoursByWeek() === 0);
     }
 
     /**
@@ -103,16 +103,7 @@ class User extends BaseUser
         return $this->sessions->getValues();
     }
 
-    public function isInThisSession($sessionId)
-    {
-        foreach ($this->getSessions() as $session) {
-            if ($session->getId() === $sessionId) {
-                return true;
-            }
-        }
 
-        return false;
-    }
 
     /**
      * @return mixed

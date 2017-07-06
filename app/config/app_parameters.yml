@@ -1,0 +1,2 @@
+parameters:
+    max_user_by_session: 8

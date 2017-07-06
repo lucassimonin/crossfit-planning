@@ -60,11 +60,6 @@ class Session
      */
     private $users;
 
-    public function isMaxUsers()
-    {
-        return (count($this->getUsers()) === Session::USER_BY_SESSION);
-    }
-
     public function addUser(User $user)
     {
         $user->addSession($this);
@@ -121,17 +116,7 @@ class Session
         return $this->endTime;
     }
 
-    public function isStarted()
-    {
-        $currentHour = strtotime(date('H:i'));
-        $currentDay = intval(date( "w"));
-        $sessionStartHour = strtotime(date('H:i', $this->getStartTime()));
-        if ($this->getDay() < $currentDay || ($this->getDay() == $currentDay && $currentHour >= $sessionStartHour)) {
-             return true;
-        }
 
-        return false;
-    }
 
     /**
      * @param int $endTime

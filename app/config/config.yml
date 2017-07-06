@@ -2,6 +2,7 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
+    - { resource: app_parameters.yml }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -37,6 +38,12 @@ framework:
 twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
+    globals:
+        max_user: '%max_user_by_session%'
+        twig_session_helper: '@app.session_helper'
+        twig_user_helper: '@app.user_helper'
+    form_themes:
+        - 'bootstrap_3_layout.html.twig'
 
 # Doctrine Configuration
 doctrine:
@@ -79,6 +86,3 @@ fos_user:
         form:
             type: AppBundle\Form\Type\RegistrationType
 
-twig:
-    form:
-        resources: ['bootstrap_3_layout.html.twig']

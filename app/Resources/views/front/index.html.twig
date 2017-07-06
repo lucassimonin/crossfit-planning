@@ -13,16 +13,18 @@
                     <ul class="list-group" id="{{ name|trans|lower }}_{{ loop.index }}">
                         {% for training in session %}
                         <li class="list-group-item {% if training.disabled %} disabled {% endif %}">
-                            <span class="badge" title="inscrit">{{ 'app.subscription'|trans({'%nbuser%': training.session.users|length}) }}</span>
+                            <span class="badge" title="inscrit">{{ 'app.subscription'|trans({'%nbuser%': training.session.users|length, '%maxuser%': max_user}) }}</span>
                             <div class="clearfix"></div>
                             <p class="hour">{{ training.session.startTime|date('H:i') }} - {{ training.session.endTime|date('H:i') }}</p>
-                            {% if not training.disabled and not app.user.isFullSubscription and not app.user.isInThisSession(training.session.id) and not training.session.isMaxUsers %}
+                            {% set maxUserInSession = twig_session_helper.isMaxUsers(training.session) %}
+                            {% set isInThisSession = twig_user_helper.isInThisSession(app.user, training.session.id) %}
+                            {% if not training.disabled and not app.user.isFullSubscription and not isInThisSession and not maxUserInSession %}
                                 <a href="{{ path('subscription_add', {'id': training.session.id}) }}" class="btn-md btn btn-subscription">{{ 'app.btn.subscription'|trans }}</a>
                             {% else %}
-                                {% if app.user.isInThisSession(training.session.id) %}
+                                {% if isInThisSession %}
                                     <p class="alert-info">{{ 'app.session.subscription_here'|trans }}</p>
                                     <a href="{{ path('subscription_remove', {'id': training.session.id}) }}" class="btn-md btn btn-subscription btn-delete">{{ 'app.btn.unsubscription'|trans }}</a>
-                                {% elseif training.session.isMaxUsers %}
+                                {% elseif maxUserInSession %}
                                     <p class="alert-danger">{{ 'app.session.max_user'|trans }}</p>
                                 {% endif %}
                             {% endif %}

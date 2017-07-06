@@ -22,7 +22,7 @@ app:
         exist: Il existe déjà un session pour cette période !
         start_up_end: L'heure de début ne peut pas être suppérieur à l'heure de fin !
         session_add: Session ajoutée.
-    subscription: %nbuser%/8 inscrit
+    subscription: %nbuser%/%maxuser% inscrit
     monday: Lundi
     tuesday: Mardi
     wednesday: Mercredi
