@@ -54,6 +54,10 @@
     margin-top:5px;
 }
 
+ol {
+    padding-left: 15px;
+}
+
 .alert, .navbar {
     border-radius: 0;
 }
