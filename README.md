@@ -14,6 +14,6 @@ go to : http://127.0.0.1:8000 (admin credentials : admin/admin)
 
 TODO
 =========
- - Refactoring Model create service
+ - Refactoring Model create service => DONE
  - Show list of subscriber for an session
  - Add test PHPUnit
