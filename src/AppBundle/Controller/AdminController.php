@@ -2,14 +2,14 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Form\Type\SessionType;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Entity\User;
-use AppBundle\Entity\Product;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\UserBundle\Model\UserManagerInterface;
+use FOS\UserBundle\Form\Factory\FormFactory;
+use Symfony\Component\HttpFoundation\Response;
 
 class AdminController extends Controller
 {
@@ -17,7 +17,7 @@ class AdminController extends Controller
      * @Route("/admin/dashboard", name="adminpage")
      * Dashboard index
      */
-    public function indexAction()
+    public function indexAction(): Response
     {
         return $this->render('admin/index.html.twig', []);
     }
@@ -29,9 +29,9 @@ class AdminController extends Controller
      * @param int $id
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function userAddAction(Request $request, $id = 0)
+    public function userAddAction(Request $request, int $id = 0)
     {
-        /** @var $formFactory FactoryInterface */
+        /** @var $formFactory FormFactory */
         $formFactory = $this->get('fos_user.registration.form.factory');
         /** @var $userManager UserManagerInterface */
         $userManager = $this->get('fos_user.user_manager');
@@ -43,7 +43,9 @@ class AdminController extends Controller
             $user = $userManager->createUser();
             $user->setEnabled(true);
         }
-        $form = $formFactory->createForm();
+        $form = $formFactory->createForm([
+            'admin' => true
+        ]);
         $form->setData($user);
 
         $form->handleRequest($request);
@@ -60,8 +62,9 @@ class AdminController extends Controller
 
     /**
      * @Route("/admin/user/list", name="user_list")
+     * @return Response
      */
-    public function userListAction()
+    public function userListAction(): Response
     {
         $entityManager = $this->container->get('doctrine.orm.entity_manager');
         $users = $entityManager->getRepository('AppBundle:User')->findAll();
@@ -70,7 +73,7 @@ class AdminController extends Controller
     /**
      * @Route("/admin/user_state/{id}", name="user_change_state", requirements={"id": "\d+"})
      */
-    public function changeStateUserAction($id)
+    public function changeStateUserAction(int $id)
     {
         /** @var EntityManager $entityManager */
         $entityManager = $this->container->get('doctrine.orm.entity_manager');
@@ -102,7 +105,7 @@ class AdminController extends Controller
      * @param $entity
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function removeAction($id, $entity)
+    public function removeAction(int $id, string $entity)
     {
         $entityManager = $this->container->get('doctrine.orm.entity_manager');
         $repository = $entityManager->getRepository('AppBundle:' . ucfirst($entity));

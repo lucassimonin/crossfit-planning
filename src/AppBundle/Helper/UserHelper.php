@@ -16,7 +16,7 @@ class UserHelper
      * @param $sessionId
      * @return bool
      */
-    public function isInThisSession(User $user, $sessionId)
+    public function isInThisSession(User $user, int $sessionId): bool
     {
         foreach ($user->getSessions() as $session) {
             if ($session->getId() === $sessionId) {

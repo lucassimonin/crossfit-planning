@@ -55,6 +55,9 @@ class User extends BaseUser
         parent::__construct();
         $this->sessions = new ArrayCollection();
         $this->hoursByWeek = 3;
+        $this->firstName = '';
+        $this->lastName = '';
+        $this->phone = '';
     }
 
     public function addSession(Session $session)
@@ -69,15 +72,15 @@ class User extends BaseUser
         $this->hoursByWeek++;
     }
 
-    public function isFullSubscription()
+    public function isFullSubscription(): bool
     {
         return ($this->getHoursByWeek() === 0);
     }
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getHoursByWeek()
+    public function getHoursByWeek(): int
     {
         return $this->hoursByWeek;
     }
@@ -101,54 +104,54 @@ class User extends BaseUser
 
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getFirstName()
+    public function getFirstName(): string
     {
         return $this->firstName;
     }
 
     /**
-     * @param mixed $firstName
+     * @param string $firstName
      */
-    public function setFirstName($firstName)
+    public function setFirstName(string $firstName)
     {
         $this->firstName = $firstName;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getLastName()
+    public function getLastName(): string
     {
         return $this->lastName;
     }
 
     /**
-     * @param mixed $lastName
+     * @param string $lastName
      */
-    public function setLastName($lastName)
+    public function setLastName(string $lastName)
     {
         $this->lastName = $lastName;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getPhone()
+    public function getPhone(): string
     {
         return $this->phone;
     }
 
     /**
-     * @param mixed $phone
+     * @param string $phone
      */
-    public function setPhone($phone)
+    public function setPhone(string $phone)
     {
         $this->phone = $phone;
     }
 
-    public function getFullName()
+    public function getFullName(): string
     {
         return $this->firstName . ' ' . $this->lastName;
     }

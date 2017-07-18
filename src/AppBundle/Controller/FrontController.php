@@ -11,7 +11,7 @@ use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Translation\Translator;
+use Symfony\Component\HttpFoundation\Response;
 
 class FrontController extends Controller
 {
@@ -19,7 +19,7 @@ class FrontController extends Controller
      * @Route("/", name="homepage")
      * Index page
      */
-    public function indexAction()
+    public function indexAction(): Response
     {
         /** @var SessionHelper $sessionHelper */
         $sessionHelper = $this->get('app.session_helper');
@@ -208,7 +208,7 @@ class FrontController extends Controller
      * Get user information
      * @return array
      */
-    private function getUserInformation()
+    private function getUserInformation(): array
     {
         $securityContext = $this->container->get('security.authorization_checker');
         if (!$securityContext->isGranted('IS_AUTHENTICATED_FULLY')) {

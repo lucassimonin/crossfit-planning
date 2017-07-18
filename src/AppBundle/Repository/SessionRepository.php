@@ -7,12 +7,12 @@ use Doctrine\ORM\EntityRepository;
 
 class SessionRepository extends EntityRepository
 {
-    public function findAllOrderBy($orderBy = [])
+    public function findAllOrderBy(array $orderBy = []): array
     {
         return $this->findBy([], $orderBy);
     }
 
-    public function getExistingSession(Session $session)
+    public function getExistingSession(Session $session): array
     {
         return $this->getEntityManager()
             ->createQuery(

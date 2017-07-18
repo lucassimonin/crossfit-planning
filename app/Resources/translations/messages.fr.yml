@@ -1,6 +1,7 @@
 layout:
     logged_in_as: Bienvenue %username%, il vous reste %hour%h cette semaine
 app:
+    create_account: Créer un compte
     session:
         form:
             day: Jour
@@ -40,6 +41,7 @@ app:
         user_not_exist: L'utilisateur n'existe pas !
         admin_user: Impossible de modifier le statut d'un Admin !
         state_update: Statut modifié.
+        user_create_front: Inscription validée. Vous allez reçevoir un mail quand votre compte sera activé.
         meta_title:
             list: Liste utilisateur
         form:

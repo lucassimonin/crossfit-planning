@@ -27,7 +27,7 @@ class SessionHelper
      * @param Session $session
      * @return bool
      */
-    public function isStarted(Session $session) : bool
+    public function isStarted(Session $session): bool
     {
         $currentHour = strtotime(date('H:i'));
         $currentDay = intval(date("w"));
@@ -39,7 +39,7 @@ class SessionHelper
         return false;
     }
 
-    public function isMaxUsers(Session $session)
+    public function isMaxUsers(Session $session): bool
     {
         return (count($session->getUsers()) === $this->maxUserBySession);
     }

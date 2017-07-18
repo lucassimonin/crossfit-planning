@@ -18,6 +18,7 @@ security:
             logout:       true
             anonymous:    true
     access_control:
+        - { path: ^/register$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/, role: ROLE_USER }
         - { path: ^/admin/, role: ROLE_ADMIN }

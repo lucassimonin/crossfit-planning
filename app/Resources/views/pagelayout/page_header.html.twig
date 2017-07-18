@@ -7,11 +7,13 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{ path('homepage') }}"><img src={{ asset('/assets/public/img/logo-app.png') }} /></a>
+            <a class="navbar-brand" href="{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}{{ path('homepage') }}{% else %}{{ path('fos_user_security_login') }}{% endif %}"><img src={{ asset('/assets/public/img/logo-app.png') }} /></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li><a href="{{ path('homepage') }}">{{ 'app.global.home'|trans }}</a></li>
+                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                    <li><a href="{{ path('homepage') }}">{{ 'app.global.home'|trans }}</a></li>
+                {% endif %}
                 {% if is_granted("ROLE_ADMIN") or is_granted("ROLE_SUPER_ADMIN") %}
                     <li><a href="{{ path('adminpage') }}">{{ 'app.global.dashboard'|trans }}</a></li>
                     <li><a href="{{ path('session_add') }}">{{ 'app.global.add_session'|trans }}</a></li>

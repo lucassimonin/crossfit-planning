@@ -75,12 +75,15 @@ class Session
     public function __construct()
     {
         $this->users = new ArrayCollection();
+        $this->day = self::MONDAY;
+        $this->endTime = 0;
+        $this->startTime = 0;
     }
 
     /**
      * @return int
      */
-    public function getDay()
+    public function getDay(): int
     {
         return $this->day;
     }
@@ -96,7 +99,7 @@ class Session
     /**
      * @return int
      */
-    public function getStartTime()
+    public function getStartTime(): int
     {
         return $this->startTime;
     }
@@ -112,7 +115,7 @@ class Session
     /**
      * @return int
      */
-    public function getEndTime()
+    public function getEndTime(): int
     {
         return $this->endTime;
     }
@@ -161,7 +164,7 @@ class Session
 
 
 
-    public function intToDay()
+    public function intToDay(): string
     {
         $string = '';
         switch ($this->day) {
