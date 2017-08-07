@@ -1,2 +1,3 @@
 parameters:
     max_user_by_session: 8
+    email_contact: frederic.morlon@gmail.com

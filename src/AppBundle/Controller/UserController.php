@@ -19,7 +19,7 @@ class UserController extends Controller
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function userAddAction(Request $request)
+    public function userAddAction(Request $request): Response
     {
         /** @var $formFactory FactoryInterface */
         $formFactory = $this->get('fos_user.registration.form.factory');
@@ -35,6 +35,17 @@ class UserController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $userManager->updateUser($user);
             $this->addFlash('success', 'app.user.user_create_front');
+            $message = new \Swift_Message('Crossfit Palavas - Nouveau compte', $this->renderView(
+                    'front/email/new_account.html.twig'),'text/html');
+            $message->setFrom('no_reply@crossfitpalavas.fr');
+            $message->setTo($this->getParameter('email_contact'));
+            $this->get('mailer')->send($message);
+
+            $message = new \Swift_Message('Crossfit Palavas - Nouveau compte', $this->renderView(
+                    'front/email/new_account_user.html.twig'),'text/html');
+            $message->setFrom('no_reply@crossfitpalavas.fr');
+            $message->setTo($user->getEmail());
+            $this->get('mailer')->send($message);
 
             return $this->redirectToRoute('user_list');
         }
