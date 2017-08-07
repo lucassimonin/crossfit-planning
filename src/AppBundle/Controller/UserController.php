@@ -47,7 +47,7 @@ class UserController extends Controller
             $message->setTo($user->getEmail());
             $this->get('mailer')->send($message);
 
-            return $this->redirectToRoute('user_list');
+            return $this->redirectToRoute('fos_user_security_login');
         }
 
         return $this->render('front/form/register.html.twig', ['form' => $form->createView()]);

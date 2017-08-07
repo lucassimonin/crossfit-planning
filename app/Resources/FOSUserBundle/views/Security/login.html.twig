@@ -1,5 +1,6 @@
 {% extends 'base.html.twig' %}
 {% trans_default_domain 'FOSUserBundle' %}
+{% block meta_title %}Login{% endblock %}
 {% block page_header %}
 {% endblock %}
 {% block content %}
@@ -26,7 +27,7 @@
                 <input type="checkbox" id="remember_me" name="_remember_me" value="on" /> {{ 'security.login.remember_me'|trans }}
             </div>
             <button type="submit" class="btn btn-login">{{ 'Login'|trans }}</button>
-            <a href="{{ path('user_register') }}">{{ 'app.create_account'|trans }}</a>
+            <a href="{{ path('user_register') }}">Créer un compte</a>
         </form>
     </div>
 {% endblock content %}
