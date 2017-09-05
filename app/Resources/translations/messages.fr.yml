@@ -60,6 +60,7 @@ app:
         dashboard: Backoffice
         profile: Profil
         add_session: Ajouter une session
+        wod_show: Ajouter un entrainement
     btn:
         subscription: S'inscrire
         unsubscription: Se désinscrire

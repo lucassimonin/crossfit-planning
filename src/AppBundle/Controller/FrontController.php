@@ -10,6 +10,7 @@ use AppBundle\Helper\UserHelper;
 use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -21,6 +22,10 @@ class FrontController extends Controller
      */
     public function indexAction(): Response
     {
+        $params = $this->getUserInformation();
+        if ($params['error']) {
+            return $params['response'];
+        }
         /** @var SessionHelper $sessionHelper */
         $sessionHelper = $this->get('app.session_helper');
         $sessions = $this->getDoctrine()->getRepository('AppBundle:Session')->findAllOrderBy(['day' => 'ASC', 'startTime' => 'ASC']);
@@ -35,6 +40,21 @@ class FrontController extends Controller
         }
 
         return $this->render('front/index.html.twig', ['back' => false, 'sessions' => $sessionArray]);
+    }
+
+    /**
+     * @Route("/showwod", name="wod_show")
+     * Page of wod page
+     */
+    public function showWod(): Response
+    {
+        $params = $this->getUserInformation();
+        if ($params['error']) {
+            return $params['response'];
+        }
+        $datas = ['a'];
+
+        return $this->render('front/wod.html.twig', ['back' => false, 'datas' => $datas]);
     }
 
     /**

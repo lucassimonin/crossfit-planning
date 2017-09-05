@@ -13,6 +13,7 @@
             <ul class="nav navbar-nav">
                 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                     <li><a href="{{ path('homepage') }}">{{ 'app.global.home'|trans }}</a></li>
+                    <li><a href="{{ path('wod_show') }}">{{ 'app.global.wod_show'|trans }}</a></li>
                 {% endif %}
                 {% if is_granted("ROLE_ADMIN") or is_granted("ROLE_SUPER_ADMIN") %}
                     <li><a href="{{ path('adminpage') }}">{{ 'app.global.dashboard'|trans }}</a></li>

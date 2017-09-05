@@ -87,6 +87,17 @@ h1, .h1, h2, .h2, h3, .h3 {
     color:#fff;
 }
 
+.btn-subscription.btn-strength {
+    border: 1px solid #006000;
+    background-color: rgb(255, 255, 255);
+    color: #006000;
+}
+
+.btn-subscription.btn-strength:hover {
+    background-color: #008200;
+    color:#fff;
+}
+
 .btn-delete:hover {
     background-color: #A21D21;
     color:#fff;
