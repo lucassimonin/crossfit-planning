@@ -1,0 +1,68 @@
+.fc-event {
+    border-radius:0;
+    text-align: center;
+    padding: 5px 0;
+}
+
+.fc-unthemed td.fc-today {
+    background: rgba(0,130,0,0.1);
+}
+
+#calendar {
+    margin-top:20px;
+}
+
+.fc-left h2 {
+color: #333;
+    margin-top: 0;
+    white-space: nowrap;
+    font-size: 32px;
+    font-weight: 100;
+    margin-bottom: 10px;
+}
+
+.fc th {
+    padding:10px;
+    font-weight: 100;
+}
+
+.fc-toolbar button {
+    position: relative;
+    border: 1px solid #333;
+    background: rgb(255, 255, 255);
+    color: #333;
+    background-color: transparent;
+    outline: none;
+    cursor: pointer;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.fc-state-default.fc-corner-right {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.fc-state-default.fc-corner-left {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.fc-toolbar button {
+    height:34px;
+}
+
+.fc-toolbar button:hover, .fc-toolbar button.fc-state-active {
+    background-color:#333;
+    color:#fff;
+}
+
+.fc-event.strength {
+    background-color:#006000;
+    border:none;
+}
+
+.fc-event.wod {
+    background-color:#337ab7;
+    border:none;
+}

@@ -9,8 +9,12 @@
        <div class="col-sm-6">
            <a href="" class="btn btn-subscription btn-strength">Ajouter un travail de force</a>
        </div>
+       <div class="col-sm-12">
+           <div id='calendar'></div>
+       </div>
     {% else %}
         {{ 'app.no_data'|trans }}
     {% endif %}
 </div>
+{% include ':parts:modal_wod.html.twig'  with {} %}
 {% endblock %}
