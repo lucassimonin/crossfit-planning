@@ -17758,14 +17758,16 @@ var ListViewGrid = Grid.extend({
         }
         titleContent = eventDef.title;
         classTd = '';
+        classA = 'wodlist';
         if(eventDef.className == 'strength') {
+            classA = '';
             titleContent = 'F: ' + eventDef.data.mvt + ' ' + eventDef.data.weight + 'Kg';
             classTd = 'colspan="3"';
         }
 
         return '<tr class="' + classes.join(' ') + '">' +
             '<td class="fc-list-item-title ' + theme.getClass('widgetContent') + '">' +
-                '<a class="wodlist"' + (url ? ' href="' + htmlEscape(url) + '"' : '') + "data-elt='" + JSON.stringify(eventDef.data) + "'" + '>' +
+                '<a class="' + classA + '"' + (url ? ' href="' + htmlEscape(url) + '"' : '') + "data-elt='" + JSON.stringify(eventDef.data) + "'" + '>' +
                     htmlEscape(titleContent || '') +
                 '</a>' +
             '</td>' +
