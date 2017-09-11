@@ -112,7 +112,7 @@ $( document ).ready(function() {
             events: events
         });
         
-        $(document).on('click', '.wod', function () {
+        $(document).on('click', '.wod, .wodlist', function () {
             $('#date').html($(this).data('elt').date);
             var movementFormat = '<table class="table"><thead><tr><th>Nom</th><th>Poids</th><th>Répétition</th></tr></thead><tbody>';
             $.each($(this).data('elt').movements, function(i, elt) {

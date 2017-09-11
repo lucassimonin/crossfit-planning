@@ -60,9 +60,11 @@ color: #333;
 .fc-event.strength, .fc-list-item.strength {
     background-color:#006000;
     border:none;
+    color:#fff;
 }
 
 .fc-event.wod, .fc-list-item.wod {
     background-color:#337ab7;
     border:none;
+    color:#fff;
 }

@@ -17765,7 +17765,7 @@ var ListViewGrid = Grid.extend({
 
         return '<tr class="' + classes.join(' ') + '">' +
             '<td class="fc-list-item-title ' + theme.getClass('widgetContent') + '">' +
-                '<a' + (url ? ' href="' + htmlEscape(url) + '"' : '') + '>' +
+                '<a class="wodlist"' + (url ? ' href="' + htmlEscape(url) + '"' : '') + "data-elt='" + JSON.stringify(eventDef.data) + "'" + '>' +
                     htmlEscape(titleContent || '') +
                 '</a>' +
             '</td>' +
