@@ -76,7 +76,8 @@ class FrontController extends Controller
             foreach ($wod->getMovements() as $movement) {
                 $movements[] = [
                     'name' => $movement->getName(),
-                    'weight' => $movement->getWeight()
+                    'weight' => $movement->getWeight(),
+                    'repetition' => $movement->getRepetition()
                 ];
             }
             $events[] = ['title' => 'WOD',
@@ -85,7 +86,9 @@ class FrontController extends Controller
                 'data' => [
                     'date' => $wod->getDate()->format('d/m/Y'),
                     'type' => $translator->trans($wod->intToType()),
-                    'movements' => $movements
+                    'comment' => $wod->getComment(),
+                    'movements' => $movements,
+                    'score' => $wod->getScore()
                 ]
             ];
         }

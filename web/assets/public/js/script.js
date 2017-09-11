@@ -78,9 +78,6 @@ $( document ).ready(function() {
         });
     }
 
-
-
-
     if($(".movements").length) {
         $collectionHolder = $('ul.movements');
         console.log($collectionHolder);
@@ -117,8 +114,36 @@ $( document ).ready(function() {
         
         $(document).on('click', '.wod', function () {
             $('#date').html($(this).data('elt').date);
+            var movementFormat = `
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Poids</th>
+                            <th>Répétition</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+            $.each($(this).data('elt').movements, function(i, elt) {
+                movementFormat = movementFormat + `
+                    <tr>
+                        <td>${elt.name}</td>
+                        <td>${elt.weight} Kg</td>
+                        <td>${elt.repetition}</td>
+                    </tr>
+                `;
+            });
+
+            movementFormat = movementFormat + "</tbody></table>"
+            $('#modalAgenda .modal-body').html(`
+                <p><label>Type:</label> ${$(this).data('elt').type}</p>
+                <p><label>Score:</label> ${$(this).data('elt').score}</p>
+                <p><label>Mouvement(s):</label></p>
+                <p>${movementFormat}</p>
+                <p><label>commentaire:</label> ${$(this).data('elt').comment}</p>
+                `);
             $('#modalAgenda').modal('show');
-            console.log($(this).data('elt'));
         });
     }
 });
