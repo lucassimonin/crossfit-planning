@@ -63,6 +63,15 @@ color: #333;
     color:#fff;
 }
 
+.wodlist {
+    width: 100%;
+    display: block;
+}
+
+.btn-strength {
+    margin-top: 10px;
+}
+
 .fc-event.wod, .fc-list-item.wod {
     background-color:#337ab7;
     border:none;
