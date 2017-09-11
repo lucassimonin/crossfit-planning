@@ -26,9 +26,9 @@ class Strength
      */
     private $id;
     /**
-     * @var \DateTime $day
+     * @var \DateTime $date
      *
-     * @ORM\Column(name="day", type="date", nullable=false)
+     * @ORM\Column(name="date", type="date", nullable=false)
      */
     private $date;
 
@@ -65,7 +65,7 @@ class Strength
     /**
      * @return string
      */
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -89,7 +89,7 @@ class Strength
     /**
      * @return float
      */
-    public function getWeight(): float
+    public function getWeight(): ?float
     {
         return $this->weight;
     }

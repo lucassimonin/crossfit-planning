@@ -41,9 +41,16 @@ class Movement
     private $weight;
 
     /**
+     * @var integer $repetition
+     *
+     * @ORM\Column(name="repetition", type="integer", nullable=true)
+     */
+    private $repetition;
+
+    /**
      * @return string
      */
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -65,9 +72,27 @@ class Movement
     }
 
     /**
+     * @return int
+     */
+    public function getRepetition(): ?int
+    {
+        return $this->repetition;
+    }
+
+    /**
+     * @param int $repetition
+     */
+    public function setRepetition(int $repetition)
+    {
+        $this->repetition = $repetition;
+    }
+
+
+
+    /**
      * @return float
      */
-    public function getWeight(): float
+    public function getWeight(): ?float
     {
         return $this->weight;
     }

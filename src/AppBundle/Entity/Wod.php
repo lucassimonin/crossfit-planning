@@ -15,7 +15,6 @@ use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\Common\Collections\ArrayCollection;
 use AppBundle\Entity\Movement;
 
-
 /**
  * @ORM\Entity
  * @ORM\Table(name="wod_crossfit")
@@ -43,6 +42,20 @@ class Wod
     private $date;
 
     /**
+     * @var string $score
+     *
+     * @ORM\Column(name="score", type="string", nullable=false)
+     */
+    private $score;
+
+    /**
+     * @var string $comment
+     *
+     * @ORM\Column(name="comment", type="string", nullable=false)
+     */
+    private $comment;
+
+    /**
      * @var int $type
      *
      * @ORM\Column(name="type", type="integer", nullable=false)
@@ -51,11 +64,7 @@ class Wod
 
     /**
      * Many Wod have Many Movements.
-     * @ManyToMany(targetEntity="Movement")
-     * @JoinTable(name="wods_movements",
-     *      joinColumns={@JoinColumn(name="wod_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@JoinColumn(name="movement_id", referencedColumnName="id", unique=true)}
-     *      )
+     * @ManyToMany(targetEntity="Movement", cascade={"persist"})
      */
     private $movements;
 
@@ -68,12 +77,29 @@ class Wod
     }
 
     /**
+     * @return string
+     */
+    public function getComment(): ?string
+    {
+        return $this->comment;
+    }
+
+    /**
+     * @param string $comment
+     */
+    public function setComment(string $comment)
+    {
+        $this->comment = $comment;
+    }
+
+
+    /**
      * Add movement
      * @param Movement $movement
      */
     public function addMovement(Movement $movement)
     {
-        $this->movements[] = $movement;
+        $this->movements->add($movement);
     }
 
     /**
@@ -120,7 +146,7 @@ class Wod
     /**
      * @return int
      */
-    public function getType(): int
+    public function getType(): ?int
     {
         return $this->type;
     }
@@ -134,10 +160,49 @@ class Wod
     }
 
     /**
+     * @return string
+     */
+    public function getScore(): ?string
+    {
+        return $this->score;
+    }
+
+    /**
+     * @param string $score
+     */
+    public function setScore(string $score)
+    {
+        $this->score = $score;
+    }
+
+
+
+    /**
      * @param int $id
      */
     public function setId(int $id)
     {
         $this->id = $id;
+    }
+
+    public function intToType(): string
+    {
+        switch ($this->type) {
+            default:
+            case Wod::EMOM:
+                $string = 'app.emom';
+            break;
+            case Wod::FORTIME:
+                $string = 'app.for_time';
+            break;
+            case Wod::TABATA:
+                $string = 'app.tabata';
+            break;
+            case Wod::AMRAP:
+                $string = 'app.amrap';
+            break;
+        }
+
+        return $string;
     }
 }

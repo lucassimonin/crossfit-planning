@@ -2,18 +2,23 @@
 {% block meta_title %}Wod{% endblock %}
 {% block content %}
 <div class="container" id="main">
-    {% if datas|length > 0 %}
-       <div class="col-sm-6">
-           <a href="" class="btn btn-subscription">Ajouter une séance</a>
-       </div>
-       <div class="col-sm-6">
-           <a href="" class="btn btn-subscription btn-strength">Ajouter un travail de force</a>
-       </div>
+    <div class="col-sm-6">
+        <a href="{{ path('wod_add') }}" class="btn btn-subscription">{{ 'app.add_wod'|trans }}</a>
+    </div>
+    <div class="col-sm-6">
+        <a href="{{ path('strength_add') }}" class="btn btn-subscription btn-strength">{{ 'app.add_strength'|trans }}</a>
+    </div>
+    {% if eventCount > 0 %}
+        <script type="text/javascript">
+            var events = {{ events|raw }};
+        </script>
        <div class="col-sm-12">
            <div id='calendar'></div>
        </div>
     {% else %}
+    <div class="col-sm-12">
         {{ 'app.no_data'|trans }}
+    </div>
     {% endif %}
 </div>
 {% include ':parts:modal_wod.html.twig'  with {} %}

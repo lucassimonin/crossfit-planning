@@ -1,7 +1,34 @@
 layout:
     logged_in_as: Bienvenue %username%, il vous reste %hour%h cette semaine
 app:
+    modal:
+        title: Détails du WOD du
+    close: Fermer
+    add_wod: Ajouter une séance
+    add_strength: Ajouter un travail de force
     create_account: Créer un compte
+    strength:
+        already_exist: Vous avez déjà un entraîment à cette date.
+        strength_add: Entraïnement de force ajouté.
+        form:
+            date: Date
+            name: Mouvement
+            weight: Poids (Kg)
+    wod:
+        already_exist: Vous avez déjà un entraîment à cette date.
+        wod_add: WOD ajouté.
+        form:
+            date: Date
+            type: Type
+            add_movement: Ajouter un mouvement
+            movements: Mouvements
+            score: Votre score (temps, tour(s), etc..)
+            comment: Commentaire
+    movement:
+        form:
+            name: Nom
+            weight: Poids (mettre 0 si poids du corps)
+            repetition: Nombre de répétition
     session:
         form:
             day: Jour
@@ -33,6 +60,10 @@ app:
     friday: Vendredi
     saturday: Samedi
     sunday: Dimanche
+    emom: EMOM
+    for_time: For time
+    tabata: Tabata
+    amrap: AMRAP
     no_data: Pas de donnée
     user:
         list: Liste utilisateur
@@ -60,7 +91,7 @@ app:
         dashboard: Backoffice
         profile: Profil
         add_session: Ajouter une session
-        wod_show: Ajouter un entrainement
+        wod_show: Mes entraînements
     btn:
         subscription: S'inscrire
         unsubscription: Se désinscrire

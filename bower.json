@@ -1,12 +1,14 @@
 {
-  "name": "crossfit planing",
+  "name": "crossfit_planing",
   "private": true,
   "dependencies": {
     "bootstrap": "3.*",
     "modernizr": "~2.8.1",
     "html5shiv": "latest",
     "respond": "latest",
-    "classie": "^1.0.1"
+    "classie": "^1.0.1",
+    "moment": "2.18.*",
+    "bootstrap-datepicker": "^1.6.4"
   },
   "overrides": {
     "bootstrap": {

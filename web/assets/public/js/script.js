@@ -4,11 +4,50 @@ var hideShowMobile = function() {
     if($(window).width() < 768) {
         $('.btn-openclose').addClass('collapsed').show();
         $('.block-day .list-group').removeClass('in').addClass('collapse');
+        if($('#calendar').length) {
+            $('.fc-center').hide();
+            $('.fc-listWeek-button').click();
+        }
     } else {
         $('.btn-openclose').removeClass('collapsed').hide();
         $('.block-day .list-group').addClass('collapse in');
+        if($('#calendar').length) {
+            $('.fc-center').show();
+            $('.fc-month-button').click();
+        }
     }
 }
+
+var addMvtForm = function($collectionHolder, $newLinkLi) {
+    // Get the data-prototype explained earlier
+    var prototype = $collectionHolder.data('prototype');
+
+    // get the new index
+    var index = $collectionHolder.data('index');
+
+    var newForm = prototype;
+    // You need this only if you didn't set 'label' => false in your tags field in TaskType
+    // Replace '__name__label__' in the prototype's HTML to
+    // instead be a number based on how many items we have
+    // newForm = newForm.replace(/__name__label__/g, index);
+
+    // Replace '__name__' in the prototype's HTML to
+    // instead be a number based on how many items we have
+    newForm = newForm.replace(/__name__/g, index);
+
+    // increase the index with one for the next item
+    $collectionHolder.data('index', index + 1);
+
+    // Display the form in the page in an li, before the "Add a tag" link li
+    var $newFormLi = $('<li></li>').append(newForm);
+    $newLinkLi.before($newFormLi);
+}
+
+var $collectionHolder;
+
+// setup an "add a tag" link
+var $addMvtLink = $('<a href="#" class="add_movement_link btn btn-default">' + $("#label_add").val() + '</a>');
+var $newLinkLi = $('<li></li>').append($addMvtLink);
 
 var xhrDelete = null,
     xhrAdd = null,
@@ -26,6 +65,41 @@ $( document ).ready(function() {
             placement: 'auto'
         });
     }
+    if($("#strength_date").length) {
+        $("#strength_date").datepicker({
+            format: "dd-mm-yyyy",
+            endDate: new Date()
+        });
+    }
+    if($("#wod_date").length) {
+        $("#wod_date").datepicker({
+            format: "dd-mm-yyyy",
+            endDate: new Date()
+        });
+    }
+
+
+
+
+    if($(".movements").length) {
+        $collectionHolder = $('ul.movements');
+        console.log($collectionHolder);
+
+        // add the "add a tag" anchor and li to the tags ul
+        $collectionHolder.append($newLinkLi);
+
+        // count the current form inputs we have (e.g. 2), use that as the new
+        // index when inserting a new item (e.g. 2)
+        $collectionHolder.data('index', $collectionHolder.find(':input').length);
+
+        $addMvtLink.on('click', function(e) {
+            // prevent the link from creating a "#" on the URL
+            e.preventDefault();
+
+            // add a new tag form (see next code block)
+            addMvtForm($collectionHolder, $newLinkLi);
+        });
+    }
     if($('#calendar').length) {
         var initialLocaleCode = 'fr';
         $('#calendar').fullCalendar({
@@ -34,43 +108,15 @@ $( document ).ready(function() {
                 center: 'month,listWeek',
                 right: 'prev,next today'
             },
-            defaultDate: '2017-09-12',
             locale: initialLocaleCode,
             navLinks: false,
             editable: true,
             eventLimit: true, // allow "more" link when too many events
-            events: [
-                {
-                    title: 'WOD',
-                    start: '2017-09-28',
-                    data: {
-                        type: 'TABATA',
-                        mvts: [
-                            {
-                                name: 'Test',
-                                weight: 12
-                            },
-                            {
-                                name: 'souleve de terre',
-                                weight: 12
-                            }
-                        ]
-                    },
-                    className: 'wod'
-                },
-                {
-                    title: 'Force',
-                    start: '2017-09-20',
-                    data: {
-                        mvt: 'souleve de terre',
-                        weight:60
-                    },
-                    className: 'strength'
-                }
-            ]
+            events: events
         });
         
         $(document).on('click', '.wod', function () {
+            $('#date').html($(this).data('elt').date);
             $('#modalAgenda').modal('show');
             console.log($(this).data('elt'));
         });

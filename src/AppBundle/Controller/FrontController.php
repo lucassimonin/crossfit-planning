@@ -3,8 +3,12 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Session;
+use AppBundle\Entity\Strength;
 use AppBundle\Entity\User;
+use AppBundle\Entity\Wod;
 use AppBundle\Form\Type\SessionType;
+use AppBundle\Form\Type\StrengthType;
+use AppBundle\Form\Type\WodType;
 use AppBundle\Helper\SessionHelper;
 use AppBundle\Helper\UserHelper;
 use Doctrine\ORM\EntityManager;
@@ -52,9 +56,123 @@ class FrontController extends Controller
         if ($params['error']) {
             return $params['response'];
         }
-        $datas = ['a'];
+        /** @var User $user */
+        $user = $params['user'];
+        $events = [];
 
-        return $this->render('front/wod.html.twig', ['back' => false, 'datas' => $datas]);
+        foreach ($user->getStrengths() as $strength) {
+            $events[] = ['title' => $strength->getName(),
+                'start' => $strength->getDate()->format('Y-m-d'),
+                'className' => 'strength',
+                'data' => [
+                    'weight' => $strength->getWeight(),
+                    'mvt' => $strength->getName()
+                ]
+            ];
+        }
+        $translator = $this->get('translator');
+        foreach ($user->getWods() as $wod) {
+            $movements = [];
+            foreach ($wod->getMovements() as $movement) {
+                $movements[] = [
+                    'name' => $movement->getName(),
+                    'weight' => $movement->getWeight()
+                ];
+            }
+            $events[] = ['title' => 'WOD',
+                'start' => $wod->getDate()->format('Y-m-d'),
+                'className' => 'wod',
+                'data' => [
+                    'date' => $wod->getDate()->format('d/m/Y'),
+                    'type' => $translator->trans($wod->intToType()),
+                    'movements' => $movements
+                ]
+            ];
+        }
+
+        return $this->render('front/wod.html.twig', ['back' => false, 'events' => json_encode($events), 'eventCount' => count($events)]);
+    }
+
+    /**
+     * @Route("/strength/add", name="strength_add")
+     * Add strength action
+     * @param Request $request
+     * @return mixed|\Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function addStrengthAction(Request $request)
+    {
+        $params = $this->getUserInformation();
+        if ($params['error']) {
+            return $params['response'];
+        }
+        $strength = new Strength();
+        $form = $this->createForm(StrengthType::class, $strength);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            /** @var EntityManager $entityManager */
+            $entityManager = $this->container->get('doctrine.orm.entity_manager');
+            $repository = $entityManager->getRepository(Strength::class);
+            /** @var Strength $session */
+            $result = $repository->findByDate($strength->getDate());
+            if (count($result) > 0) {
+                $this->addFlash('danger', "app.strength.already_exist");
+
+                return $this->render('front/add_strength.html.twig', ['form' => $form->createView()]);
+            }
+
+            /** @var User $user */
+            $user = $params['user'];
+            $user->addStrength($strength);
+            $entityManager->persist($strength);
+            $entityManager->flush();
+            $this->addFlash('success', "app.strength.strength_add");
+
+            return $this->redirectToRoute('wod_show');
+        }
+
+        return $this->render('front/add_strength.html.twig', ['form' => $form->createView()]);
+    }
+
+    /**
+     * @Route("/wod/add", name="wod_add")
+     * Add wod action
+     * @param Request $request
+     * @return mixed|\Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function addWodAction(Request $request)
+    {
+        $params = $this->getUserInformation();
+        if ($params['error']) {
+            return $params['response'];
+        }
+        $wod = new Wod();
+        $form = $this->createForm(WodType::class, $wod);
+
+        $form->handleRequest($request);
+        //dd($wod);
+        if ($form->isSubmitted() && $form->isValid()) {
+            /** @var EntityManager $entityManager */
+            $entityManager = $this->container->get('doctrine.orm.entity_manager');
+            $repository = $entityManager->getRepository(Wod::class);
+            /** @var Strength $session */
+            $result = $repository->findByDate($wod->getDate());
+            if (count($result) > 0) {
+                $this->addFlash('danger', "app.wod.already_exist");
+
+                return $this->render('front/add_wod.html.twig', ['form' => $form->createView()]);
+            }
+
+            /** @var User $user */
+            $user = $params['user'];
+            $user->addWod($wod);
+            $entityManager->persist($wod);
+            $entityManager->flush();
+            $this->addFlash('success', "app.wod.wod_add");
+
+            return $this->redirectToRoute('wod_show');
+        }
+
+        return $this->render('front/add_wod.html.twig', ['form' => $form->createView()]);
     }
 
     /**

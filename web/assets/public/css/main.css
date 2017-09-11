@@ -131,6 +131,12 @@ h1, .h1, h2, .h2, h3, .h3 {
     text-align: center;
 }
 
+.movements {
+    list-style: none;
+    border: 1px solid #c5bfbf;
+    padding: 15px;
+}
+
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
 }
@@ -153,11 +159,21 @@ h1, .h1, h2, .h2, h3, .h3 {
 }
 
 @media (max-width: 992px) {
+    .fc-day-grid-event .fc-content {
+        white-space: normal;
+        font-size: 9px;
+    }
 }
 
 @media (max-width: 767px) {
     .list-group {
         display: none;
+    }
+    .fc-toolbar .fc-left {
+        width: 100%;
+    }
+    .fc-toolbar .fc-center {
+        float: left;
     }
 }
 

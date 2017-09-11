@@ -23,7 +23,7 @@ class RegistrationType extends AbstractType
             ->add('firstName', TextType::class, ['label' => 'app.user.form.firstname'])
             ->add('lastName', TextType::class, ['label' => 'app.user.form.lastname'])
             ->add('phone', TextType::class, ['label' => 'app.user.form.phone']);
-        if($options['admin']) {
+        if ($options['admin']) {
             $builder
                 ->add('enabled', CheckboxType::class, ['label' => 'app.user.form.enabled', 'required' => false])
                 ->add('hoursByWeek', IntegerType::class, ['data' => 3, 'label' => 'app.user.form.hour']);
@@ -46,6 +46,4 @@ class RegistrationType extends AbstractType
             'admin' => false
         ]);
     }
-
-
 }

@@ -17,6 +17,7 @@ var paths = {
         js: [
             'web/assets/vendor/jquery/dist/jquery.min.js',
             'web/assets/vendor/bootstrap/dist/js/bootstrap.min.js',
+            'web/assets/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js',
             'web/assets/vendor/moment/min/moment.min.js',
             'web/assets/public/js/custom-vendor/fullcalendar.js',
             'web/assets/public/js/custom-vendor/locale-all.js',
@@ -29,6 +30,7 @@ var paths = {
         ],
         css: [
             'web/assets/vendor/bootstrap/dist/css/bootstrap.css',
+            'web/assets/vendor/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css',
             'web/assets/public/css/custom-vendor/fullcalendar.min.css',
             'web/assets/public/css/calendarwod.css',
             'web/assets/public/css/main.css',

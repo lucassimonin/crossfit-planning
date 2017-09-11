@@ -36,13 +36,13 @@ class UserController extends Controller
             $userManager->updateUser($user);
             $this->addFlash('success', 'app.user.user_create_front');
             $message = new \Swift_Message('Crossfit Palavas - Nouveau compte', $this->renderView(
-                    'front/email/new_account.html.twig'),'text/html');
+                    'front/email/new_account.html.twig'), 'text/html');
             $message->setFrom('no_reply@crossfitpalavas.fr');
             $message->setTo($this->getParameter('email_contact'));
             $this->get('mailer')->send($message);
 
             $message = new \Swift_Message('Crossfit Palavas - Nouveau compte', $this->renderView(
-                    'front/email/new_account_user.html.twig'),'text/html');
+                    'front/email/new_account_user.html.twig'), 'text/html');
             $message->setFrom('no_reply@crossfitpalavas.fr');
             $message->setTo($user->getEmail());
             $this->get('mailer')->send($message);
@@ -52,5 +52,4 @@ class UserController extends Controller
 
         return $this->render('front/form/register.html.twig', ['form' => $form->createView()]);
     }
-
 }
