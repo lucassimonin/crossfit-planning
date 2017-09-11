@@ -18,3 +18,4 @@
 /web/assets/vendor
 /web/assets/app
 /node_modules/
+.DS_Store
