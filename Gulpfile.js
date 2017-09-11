@@ -35,9 +35,6 @@ var paths = {
             'web/assets/public/css/calendarwod.css',
             'web/assets/public/css/main.css',
         ],
-        css_print: [
-            'web/assets/vendor/bootstrap/dist/css/bootstrap.css',
-        ],
         fonts: [
             'web/assets/vendor/bootstrap/fonts/**'
         ]
