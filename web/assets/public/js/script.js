@@ -54,10 +54,7 @@ var xhrDelete = null,
     xhrRemove = null;
 
 $( document ).ready(function() {
-    $(window).on('resize', function() {
-        hideShowMobile();
-    });
-    hideShowMobile();
+    
     if($('[data-toggle="popover"]').length) {
         $('[data-toggle="popover"]').popover({
             container: 'body',
@@ -123,4 +120,8 @@ $( document ).ready(function() {
             $('#modalAgenda').modal('show');
         });
     }
+    $(window).on('resize', function() {
+        hideShowMobile();
+    });
+    hideShowMobile();
 });
