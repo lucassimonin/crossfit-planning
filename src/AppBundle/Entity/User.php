@@ -94,7 +94,8 @@ class User extends BaseUser
      */
     public function addWod(Wod $wod)
     {
-        $this->wods[] = $wod;
+        $wod->setUser($this);
+        $this->wods->add($wod);
     }
 
     /**
@@ -120,7 +121,8 @@ class User extends BaseUser
      */
     public function addStrength(Strength $strength)
     {
-        $this->strengths[] = $strength;
+        $strength->setUser($this);
+        $this->strengths->add($strength);
     }
 
     /**

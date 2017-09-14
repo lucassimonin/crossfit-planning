@@ -2,6 +2,7 @@
 namespace AppBundle\Helper;
 
 use AppBundle\Entity\User;
+use AppBundle\Entity\Strength;
 
 /**
  * Created by PhpStorm.
@@ -25,5 +26,12 @@ class UserHelper
         }
 
         return false;
+    }
+
+    public function alreadyTraningAtThisDate($elementsNeededTest, $date)
+    {
+        foreach ($elementsNeededTest as $element) {
+
+        }
     }
 }

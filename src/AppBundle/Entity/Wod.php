@@ -55,6 +55,9 @@ class Wod
      */
     private $comment;
 
+    /** @ManyToOne(targetEntity="User") */
+    private $user;
+
     /**
      * @var int $type
      *
@@ -90,6 +93,22 @@ class Wod
     public function setComment(string $comment)
     {
         $this->comment = $comment;
+    }
+
+    /**
+     * @return User
+     */
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param User $user
+     */
+    public function setUser(User $user)
+    {
+        $this->user = $user;
     }
 
 

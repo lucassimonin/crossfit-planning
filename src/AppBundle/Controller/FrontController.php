@@ -108,23 +108,23 @@ class FrontController extends Controller
         if ($params['error']) {
             return $params['response'];
         }
+        /** @var User $user */
+        $user = $params['user'];
         $strength = new Strength();
         $form = $this->createForm(StrengthType::class, $strength);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var EntityManager $entityManager */
             $entityManager = $this->container->get('doctrine.orm.entity_manager');
-            $repository = $entityManager->getRepository(Strength::class);
-            /** @var Strength $session */
-            $result = $repository->findByDate($strength->getDate());
-            if (count($result) > 0) {
+            /** @var UserHelper $userHelper */
+            $userHelper = $this->get('app.user_helper');
+            if ($userHelper->alreadyTraningAtThisDate($user->getStrengths(), $strength->getDate())) {
                 $this->addFlash('danger', "app.strength.already_exist");
 
                 return $this->render('front/add_strength.html.twig', ['form' => $form->createView()]);
             }
 
-            /** @var User $user */
-            $user = $params['user'];
+
             $user->addStrength($strength);
             $entityManager->persist($strength);
             $entityManager->flush();
@@ -154,19 +154,19 @@ class FrontController extends Controller
         $form->handleRequest($request);
         //dd($wod);
         if ($form->isSubmitted() && $form->isValid()) {
+            /** @var User $user */
+            $user = $params['user'];
             /** @var EntityManager $entityManager */
             $entityManager = $this->container->get('doctrine.orm.entity_manager');
-            $repository = $entityManager->getRepository(Wod::class);
-            /** @var Strength $session */
-            $result = $repository->findByDate($wod->getDate());
-            if (count($result) > 0) {
+            /** @var UserHelper $userHelper */
+            $userHelper = $this->get('app.user_helper');
+            if ($userHelper->alreadyTraningAtThisDate($user->getWods(), $wod->getDate())) {
                 $this->addFlash('danger', "app.wod.already_exist");
 
                 return $this->render('front/add_wod.html.twig', ['form' => $form->createView()]);
             }
 
-            /** @var User $user */
-            $user = $params['user'];
+
             $user->addWod($wod);
             $entityManager->persist($wod);
             $entityManager->flush();
