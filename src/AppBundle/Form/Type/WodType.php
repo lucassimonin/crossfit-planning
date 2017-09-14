@@ -28,6 +28,7 @@ class WodType extends AbstractType
             ->add('score', TextType::class, [
             ])
             ->add('comment', TextareaType::class, [
+                'required' => false
             ])
             ->add('type', ChoiceType::class, [
                 'choices' => [

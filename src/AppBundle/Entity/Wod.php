@@ -14,6 +14,8 @@ use Doctrine\ORM\Mapping\JoinTable;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\Common\Collections\ArrayCollection;
 use AppBundle\Entity\Movement;
+use AppBundle\Entity\User;
+use Doctrine\ORM\Mapping\ManyToOne;
 
 /**
  * @ORM\Entity
@@ -51,7 +53,7 @@ class Wod
     /**
      * @var string $comment
      *
-     * @ORM\Column(name="comment", type="string", nullable=false)
+     * @ORM\Column(name="comment", type="string", nullable=true)
      */
     private $comment;
 
