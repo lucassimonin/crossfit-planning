@@ -86,7 +86,7 @@ app:
             disabled: Désactivé
             htag: '#'
     global:
-        title: Crossfit Planner
+        title: FMC Crossfit Palavas
         home: Accueil
         dashboard: Backoffice
         profile: Profil
