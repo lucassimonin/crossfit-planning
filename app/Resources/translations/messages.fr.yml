@@ -1,5 +1,5 @@
 layout:
-    logged_in_as: Bienvenue %username%, il vous reste %hour%h cette semaine
+    logged_in_as: Il vous reste %hour%h de cours cette semaine
 app:
     back_to_admin: Retour admin
     add: Ajouter

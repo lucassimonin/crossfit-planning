@@ -12,6 +12,9 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                    <li class="hidden-sm hidden-md hidden-lg">
+                        <span class="user-logged">{{ 'layout.logged_in_as'|trans({'%hour%': app.user.hoursByWeek}) }} <span class="hidden-sm hidden-xs"></span></span>
+                    </li>
                     <li><a href="{{ path('homepage') }}">{{ 'app.global.home'|trans }}</a></li>
                     <li><a href="{{ path('wod_show') }}">{{ 'app.global.wod_show'|trans }}</a></li>
                 {% endif %}
@@ -21,16 +24,20 @@
                 {% endif %}
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li>
-                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                        <span class="user-logged pull-left">{{ 'layout.logged_in_as'|trans({'%username%': app.user.fullname, '%hour%': app.user.hoursByWeek}) }} |</span>
+                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                    <li class="hidden-xs">
+                        <span class="user-logged">{{ 'layout.logged_in_as'|trans({'%hour%': app.user.hoursByWeek}) }} <span class="hidden-sm hidden-xs"></span></span>
+                    </li>
+                    <li>
                         <a class="pull-left" href="{{ path('fos_user_security_logout') }}">
                             {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
                         </a>
-                    {% else %}
+                    </li>
+                {% else %}
+                    <li>
                         <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
-                    {% endif %}
-                </li>
+                    </li>
+                {% endif %}
                 {% if is_granted('ROLE_PREVIOUS_ADMIN') %}
                     <li>
                         <a href="{{ path('homepage', {'_switch_user': '_exit'}) }}">{{ 'app.back_to_admin'|trans }}</a>
