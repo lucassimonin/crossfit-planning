@@ -2,10 +2,22 @@
 {% block meta_title %}Admin Index{% endblock %}
 {% block content %}
 <div class="container" id="main">
-    <h2>Users</h2>
-    <ul>
-        <li><a href="{{ path('user_list') }}">List</a></li>
-        <li><a href="{{ path('user_add') }}">Add</a></li>
-    </ul>
+    <div class="col-lg-3 col-xs-6">
+        <div class="small-box bg-aqua">
+            <a href="{{ path('user_list') }}" class="small-box-footer">
+                <div class="inner">
+                    <h3>{{ userCount }}</h3>
+
+                    <p>Utilisateurs</p>
+                </div>
+                <div class="icon">
+                    <span class="glyphicon glyphicon-user"></span>
+                </div>
+
+                <p class="view-more">View more <span class="glyphicon glyphicon-chevron-right"></span></p>
+            </a>
+        </div>
+
+    </div>
 </div>
 {% endblock %}

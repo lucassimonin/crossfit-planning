@@ -3,13 +3,11 @@
 {% block content %}
     {% for user in datas %}
         <tr>
-            <td>{{ user.id }}</td>
-            <td>{{ user.username }}</td>
             <td>{{ user.email }}</td>
             <td>{{ user.firstName }} {{ user.lastName }}</td>
             <td>{{ user.phone }}</td>
             <td><a href="{{ path('user_change_state', {'id': user.id }) }}">{% if user.enabled %}{{ 'app.user.form.enabled'|trans }}{% else %}{{ 'app.user.form.disabled'|trans }}{% endif %}</a></td>
-            {% include ':parts:actions.html.twig'  with {'id': user.id, 'remove': not user.isSuperAdmin } %}
+            {% include ':parts:actions.html.twig'  with {'id': user.id, 'remove': not user.isSuperAdmin, 'username': user.username } %}
         </tr>
     {% endfor %}
 

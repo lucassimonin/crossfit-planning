@@ -19,3 +19,4 @@ TODO
  - Refactoring Model create service => DONE
  - Show list of subscriber for an session => Add tooltip on badge DONE
  - Add test PHPUnit
+ - Improve admin 

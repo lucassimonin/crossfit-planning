@@ -137,6 +137,73 @@ h1, .h1, h2, .h2, h3, .h3 {
     padding: 15px;
 }
 
+.small-box {
+    border-radius: 2px;
+    position: relative;
+    display: block;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+}
+
+.small-box>.inner {
+    padding: 10px;
+}
+
+.small-box h3, .small-box p {
+    z-index: 5;
+}
+.small-box h3 {
+    font-size: 38px;
+    font-weight: bold;
+    margin: 0 0 10px 0;
+    white-space: nowrap;
+    padding: 0;
+}
+
+.small-box p {
+    font-size: 15px;
+}
+
+.small-box .icon {
+    position: absolute;
+    top: 0px;
+    right: 10px;
+    z-index: 0;
+    font-size: 70px;
+    color: rgba(0,0,0,0.15);
+}
+
+.small-box .view-more {
+    margin-bottom: 0;
+    padding: 3px 0;
+    background: rgba(0,0,0,0.1);
+}
+
+.btn-group > .btn, .btn-group-vertical > .btn {
+    float: none;
+}
+
+.inner {
+    text-align: left;
+    padding-left: 20px;
+}
+
+.small-box>.small-box-footer {
+    position: relative;
+    text-align: center;
+    color: #fff;
+    color: rgba(255,255,255,0.8);
+    display: block;
+    z-index: 10;
+    background: rgba(0,0,0,0.1);
+    text-decoration: none;
+}
+
+
+.bg-aqua {
+    background-color: #00c0ef !important;
+}
+
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
 }

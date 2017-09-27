@@ -31,6 +31,11 @@
                         <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
                     {% endif %}
                 </li>
+                {% if is_granted('ROLE_PREVIOUS_ADMIN') %}
+                    <li>
+                        <a href="{{ path('homepage', {'_switch_user': '_exit'}) }}">{{ 'app.back_to_admin'|trans }}</a>
+                    </li>
+                {% endif %}
             </ul>
         </div><!--/.nav-collapse -->
     </div><!--/.container-fluid -->

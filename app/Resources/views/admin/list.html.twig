@@ -2,8 +2,15 @@
 {% block meta_title %}{{ ('app.'  ~ type ~ '.meta_title.list')|trans }}{% endblock %}
 {% block content %}
     <div class="container" id="main">
-        <h2>{{ ('app.'  ~ type ~ '.list')|trans }}</h2>
-        <a class="pull-right" href="{{ path(type ~ '_add') }}">Add</a>
+        <div class="pull-left">
+            <h2>{{ ('app.'  ~ type ~ '.list')|trans }}</h2>
+        </div>
+        <div class="pull-right">
+            <a class=" btn btn-default" href="{{ path(type ~ '_add') }}">
+                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> {{ 'app.add'|trans }}
+            </a>
+        </div>
+        <div class="clear"></div>
         {% if datas|length > 0 %}
             {% include ':parts:table_' ~ type ~ '.html.twig' with {'titles': titles, 'datas': datas} %}
         {% else %}

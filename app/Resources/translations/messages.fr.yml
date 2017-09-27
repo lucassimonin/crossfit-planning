@@ -1,6 +1,8 @@
 layout:
     logged_in_as: Bienvenue %username%, il vous reste %hour%h cette semaine
 app:
+    back_to_admin: Retour admin
+    add: Ajouter
     modal:
         title: Détails du WOD du
     close: Fermer
@@ -84,6 +86,7 @@ app:
             email: Email
             enabled: Activé
             disabled: Désactivé
+            actions: Actions
             htag: '#'
     global:
         title: FMC Crossfit Palavas
