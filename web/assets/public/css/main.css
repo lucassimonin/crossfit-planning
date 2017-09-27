@@ -183,6 +183,10 @@ h1, .h1, h2, .h2, h3, .h3 {
     float: none;
 }
 
+.table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
+    vertical-align: middle;
+}
+
 .inner {
     text-align: left;
     padding-left: 20px;

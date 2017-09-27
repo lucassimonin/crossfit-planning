@@ -34,7 +34,9 @@
                             {% else %}
                                 {% if isInThisSession %}
                                     <p class="alert-info">{{ 'app.session.subscription_here'|trans }}</p>
-                                    <a href="{{ path('subscription_remove', {'id': training.session.id}) }}" class="btn-md btn btn-subscription btn-delete">{{ 'app.btn.unsubscription'|trans }}</a>
+                                    {% if not training.disabled %}
+                                        <a href="{{ path('subscription_remove', {'id': training.session.id}) }}" class="btn-md btn btn-subscription btn-delete">{{ 'app.btn.unsubscription'|trans }}</a>
+                                    {% endif %}
                                 {% elseif maxUserInSession %}
                                     <p class="alert-danger">{{ 'app.session.max_user'|trans }}</p>
                                 {% endif %}
