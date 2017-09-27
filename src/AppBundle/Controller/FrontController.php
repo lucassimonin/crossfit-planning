@@ -32,7 +32,7 @@ class FrontController extends Controller
         }
         /** @var SessionHelper $sessionHelper */
         $sessionHelper = $this->get('app.session_helper');
-        $sessions = $this->getDoctrine()->getRepository('AppBundle:Session')->findAllOrderBy(['day' => 'ASC', 'startTime' => 'ASC']);
+        $sessions = $this->getDoctrine()->getRepository(Session::class)->findAllOrderBy(['day' => 'ASC', 'startTime' => 'ASC']);
         $sessionArray = [];
         if (count($sessions) > 0) {
             foreach ($sessions as $session) {
@@ -193,7 +193,7 @@ class FrontController extends Controller
         }
         /** @var EntityManager $entityManager */
         $entityManager = $this->container->get('doctrine.orm.entity_manager');
-        $repository = $entityManager->getRepository('AppBundle:Session');
+        $repository = $entityManager->getRepository(Session::class);
         /** @var Session $session */
         $session = $repository->find($id);
         if (null === $session) {

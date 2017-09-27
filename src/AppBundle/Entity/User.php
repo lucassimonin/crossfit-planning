@@ -13,7 +13,7 @@ use AppBundle\Entity\Wod;
 use AppBundle\Entity\Strength;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
  * @ORM\Table(name="fos_user")
  */
 class User extends BaseUser

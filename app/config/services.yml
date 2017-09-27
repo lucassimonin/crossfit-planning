@@ -17,4 +17,5 @@ services:
         public: true
     app.user_helper:
         class: AppBundle\Helper\UserHelper
+        arguments: ['%user_by_page%', '@doctrine.orm.entity_manager']
         public: true

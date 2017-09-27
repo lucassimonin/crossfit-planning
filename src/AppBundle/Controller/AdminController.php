@@ -19,8 +19,7 @@ class AdminController extends Controller
      */
     public function indexAction(): Response
     {
-        $userCount = count($this->getDoctrine()->getRepository(User::class)->findAll()) - 1;
-        return $this->render('admin/index.html.twig', ['userCount' => $userCount]);
+        return $this->render('admin/index.html.twig', ['userCount' => $this->get('app.user_helper')->countUser()]);
     }
 
     /**
@@ -62,14 +61,16 @@ class AdminController extends Controller
     }
 
     /**
-     * @Route("/admin/user/list", name="user_list")
+     * @Route("/admin/user/list/{page}", name="user_list", requirements={"page" = "\d+"})
+     * @param int $page
      * @return Response
      */
-    public function userListAction(): Response
+    public function userListAction(int $page = 1): Response
     {
-        $entityManager = $this->container->get('doctrine.orm.entity_manager');
-        $users = $entityManager->getRepository('AppBundle:User')->findAll();
-        return $this->render('admin/list.html.twig', ['datas' => $users, 'type' => 'user', 'titles' => ['app.user.form.email', 'app.user.form.lastname', 'app.user.form.phone', 'app.user.form.enabled', 'app.user.form.actions']]);
+
+        $datas = $this->get('app.user_helper')->CreatePagination($page);
+
+        return $this->render('admin/list.html.twig', ['datas' => $datas,'type' => 'user', 'titles' => ['app.user.form.email', 'app.user.form.lastname', 'app.user.form.phone', 'app.user.form.enabled', 'app.user.form.actions']]);
     }
     /**
      * @Route("/admin/user_state/{id}", name="user_change_state", requirements={"id": "\d+"})

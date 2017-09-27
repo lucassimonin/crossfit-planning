@@ -1,3 +1,4 @@
 parameters:
     max_user_by_session: 8
+    user_by_page: 10
     email_contact: crossfitpalavas@gmail.com

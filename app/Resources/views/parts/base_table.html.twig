@@ -12,3 +12,26 @@
         </tbody>
     </table>
 </div>
+
+{% if datas.maxPages > 1 %}
+<div class="text-center">
+    <ul class="pagination">
+        {# `«` arrow  #}
+        <li {{ datas.thisPage == 1 ? 'class="disabled"' }}>
+            <a href="{{ path('user_list', {page: datas.thisPage-1 < 1 ? 1 : datas.thisPage-1}) }}">«</a>
+        </li>
+
+        {# Render each page number #}
+        {% for i in 1..datas.maxPages %}
+            <li {{ datas.thisPage == i ? 'class="active"' }}>
+                <a href="{{ path('user_list', {page: i}) }}">{{ i }}</a>
+            </li>
+        {% endfor %}
+
+        {# `»` arrow #}
+        <li {{ datas.thisPage == datas.maxPages ? 'class="disabled"' }}>
+            <a href="{{ path('user_list', {page: datas.thisPage+1 <= datas.maxPages ? datas.thisPage+1 : datas.thisPage}) }}">»</a>
+        </li>
+    </ul>
+</div>
+{% endif %}

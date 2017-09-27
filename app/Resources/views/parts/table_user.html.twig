@@ -1,7 +1,7 @@
 {% extends ':parts:base_table.html.twig' %}
 
 {% block content %}
-    {% for user in datas %}
+    {% for user in datas.users %}
         <tr>
             <td>{{ user.email }}</td>
             <td>{{ user.firstName }} {{ user.lastName }}</td>
