@@ -75,10 +75,19 @@ $( document ).ready(function() {
         });
     }
 
+    if($('.btn-openclose').length) {
+        $(document).on('click', '.btn-openclose', function() {
+            var id = $(this).data('target');
+            if($(id).hasClass('in')) {
+                $(id).removeClass('in');
+            } else {
+                $(id).addClass('in');
+            }
+        });
+    }
+
     if($(".movements").length) {
         $collectionHolder = $('ul.movements');
-        console.log($collectionHolder);
-
         // add the "add a tag" anchor and li to the tags ul
         $collectionHolder.append($newLinkLi);
 

@@ -8,7 +8,7 @@
                 <div class="block-day panel panel-default">
                     <div class="panel-heading">
                         <h2 class="title-day">{{ name|trans }}</h2>
-                        <button type="button" class="btn btn-subscription btn-openclose" data-toggle="collapse" data-target="#{{ name|trans|lower }}_{{ loop.index }}">{{ 'app.btn.open'|trans }}</button>
+                        <button type="button" class="btn btn-subscription btn-openclose" data-target="#{{ name|trans|lower }}_{{ loop.index }}">{{ 'app.btn.open'|trans }}</button>
                     </div>
                     <ul class="list-group" id="{{ name|trans|lower }}_{{ loop.index }}">
                         {% for training in session %}
