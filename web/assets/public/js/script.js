@@ -1,6 +1,8 @@
 'use strict';
 var sizeWidth = $(window).width();
 var hideShowMobile = function() {
+    console.log('sizeWidth: ' + sizeWidth);
+    console.log('sizeWidth: ' + $(window).width());
     if(sizeWidth != $(window).width()) {
         sizeWidth = $(window).width();
         if($(window).width() < 768) {
