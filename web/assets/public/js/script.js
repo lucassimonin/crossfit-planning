@@ -1,20 +1,23 @@
 'use strict';
-
+var sizeWidth = $(window).width();
 var hideShowMobile = function() {
-    if($(window).width() < 768) {
-        console.log('resize');
-        $('.btn-openclose').addClass('collapsed').show();
-        $('.block-day .list-group').removeClass('in').addClass('collapse');
-        if($('#calendar').length) {
-            $('.fc-center').hide();
-            $('.fc-listWeek-button').click();
-        }
-    } else {
-        $('.btn-openclose').removeClass('collapsed').hide();
-        $('.block-day .list-group').addClass('collapse in');
-        if($('#calendar').length) {
-            $('.fc-center').show();
-            $('.fc-month-button').click();
+    if(sizeWidth != $(window).width()) {
+        sizeWidth = $(window).width();
+        if($(window).width() < 768) {
+                $('.btn-openclose').addClass('collapsed').show();
+                $('.block-day .list-group').removeClass('in').addClass('collapse');
+                if($('#calendar').length) {
+                    $('.fc-center').hide();
+                    $('.fc-listWeek-button').click();
+                }
+            }
+        } else {
+            $('.btn-openclose').removeClass('collapsed').hide();
+            $('.block-day .list-group').addClass('collapse in');
+            if ($('#calendar').length) {
+                $('.fc-center').show();
+                $('.fc-month-button').click();
+            }
         }
     }
 }
@@ -78,7 +81,6 @@ $( document ).ready(function() {
 
     if($('.btn-openclose').length) {
         $(document).on('click', '.btn-openclose', function() {
-            console.log('click btn');
             var id = $(this).data('target');
             if($(id).hasClass('in')) {
                 $(id).removeClass('in');
