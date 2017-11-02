@@ -10,7 +10,6 @@ var hideShowMobile = function() {
                     $('.fc-center').hide();
                     $('.fc-listWeek-button').click();
                 }
-            }
         } else {
             $('.btn-openclose').removeClass('collapsed').hide();
             $('.block-day .list-group').addClass('collapse in');
