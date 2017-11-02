@@ -1,9 +1,7 @@
 'use strict';
 var sizeWidth = $(window).width();
 var hideShowMobile = function(first) {
-    console.log('sizeWidth: ' + sizeWidth);
-    console.log('sizeWidth: ' + $(window).width());
-    if(parseInt(sizeWidth) == parseInt($(window).width()) || !first) {
+    if(parseInt(sizeWidth) == parseInt($(window).width()) && !first) {
         return true;
     }
     sizeWidth = $(window).width();
